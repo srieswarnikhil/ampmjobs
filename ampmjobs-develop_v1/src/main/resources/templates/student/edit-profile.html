@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head  th:include="student/header-head :: included-head"></head>
+
+
+<body>
+  <!-- ======= Header ======= -->
+      <header  id="header" class="fixed-top" th:include="student/header :: included-content"></header>
+  
+  <!-- End Header -->
+  <main id="main">
+ <!-- ======= Breadcrumbs ======= -->
+	    <div class="breadcrumbs" data-aos="fade-in">
+	      <div class="container">
+	        <h2>Student Edit Profile</h2>
+	        <div class="slick-carousel">
+	         <p>Use your available Free-Time productively by applying to the Jobs Listed.</p>
+	         <p>Work to become Independent</p>
+	         <p>Grow Yourself Technically and Financially </p>
+	         <p>Gain Experience while you learn</p>
+	         <p>Help yourself earn to full fill your minimum expenses (Mobile Recharge, Petrol, Good Food, Exam Fees, Movies and Outing)</p>
+	         <p>Better to work than remain Idle </p>
+	         <p>"Success is not final, failure is not fatal: It is the courage to continue that counts." - Winston Churchill</p>
+	         <p> "The only way to do great work is to love what you do." - Steve Jobs</p>
+	         <p>"The journey of a thousand miles begins with one step." - Lao Tzu</p>
+	         <p>"Unlock opportunities, unlock your potential. Find your perfect part-time job in ampmjobs."  </p>
+	         <p>"Empowering Students one job at a time Discover flexible part-time opportunities on ampm jobs."  </p>
+	         <p>"Work smarter, not harder Find part-time jobs that fit your schedule with ampmjobs."  </p>
+	         <p>"Make your downtime count. Explore part-time gigs tailored for students, only on ampmjobs."  </p>
+	         <p>"Your future starts now. Kick-start your career journey with part-time jobs from ampmjobs."  </p>
+	         <p>"Study smart, work smart. Find meaningful part-time work that complements your studies on ampmjobs."  </p>
+	         <p>"From campus to career. Discover part-time jobs that align with your aspirations on ampmjobs."  </p>
+	         <p>"Build your resume while you build your future. Find part-time gigs that matter on ampmjobs."  </p>
+	         <p>"Where opportunity meets convenience. Find part-time work that fits into your busy student life with ampmjobs."  </p>
+	         <p>"Don't just earn, learn. Explore valuable part-time job opportunities for students on ampmjobs."  </p>
+	         <!-- Add more <p> elements with additional text -->
+	       </div>   
+	      </div>
+	    </div>
+	  <!-- End Breadcrumbs -->
+
+  <div class="student-editprofile-container">
+    <div class="root">
+
+      <div class="profile">
+
+          <div class="profile-top-bar">
+              <span>Student Edit Profile</span>
+          </div>
+
+          <div class="profile-form">
+
+              <form method="post" th:action="@{/student/updateStudentProfile}" th:object="${userDetails}" id="editStudentUserProfile">
+              
+
+                  <div class="form-field-container">
+                      
+                      <div class="form-section">
+                          <div class="form-field">
+                              <label for="name">Name</label>
+                              <input type="text" th:value="${userDetails.name}" disabled >
+                          </div>
+              
+                          <div class="form-field">
+                              <label for="email">Email</label>
+                              <input type="email"  th:value="${userDetails.email}" disabled >
+                          </div>
+              
+                          <div class="form-field">
+                              <label for="phone">Phone</label>
+                              <input type="tel" th:value="${userDetails.phone}" disabled >
+                          </div>
+              
+                          <div class="form-field">
+                              <label for="gender">Gender</label>
+                              <select id="gender" disabled>
+                                  <option selected="selected" th:text="${userDetails.gender}"></option>
+                              </select>
+                          </div>                            
+              
+                          <div class=form-field>
+                              <label for=blood_group>Blood Group</label>
+                              <input type=text id=blood_group th:value="${userDetails.blood_group}" disabled >
+                          </div>
+              
+                          <div class=form-field>                                
+                              <div id="list1" class="dropdown-check-list" tabindex="100">
+                                  <span class="anchor" >View Interests</span>
+                                  <ul class="items" >
+                                      <li th:each="myData : ${myTitles}" ><input type="checkbox" checked="checked"  class="checkbox"  disabled th:text="${myData.jobtype_name}" ></li>
+                                  </ul>
+                                  
+                              </div>
+                          </div>
+                      </div>
+              
+                      <div class="form-section">
+
+                  <div class=form-field>
+                    <!--<label for=qualifications th:text="${userDetails.qualification}"></label>-->
+                    <label for=qualifications>Qualification</label>
+                    <select id=qualifications name=qualifications required style="padding: 5px; padding-inline: 2px;">
+                      <option th:selected="${userDetails.qualification == 'Graduate'}">Graduate</option>
+                      <option th:selected="${userDetails.qualification == 'Under Graduate'}" >Under Graduate</option>
+                    </select>
+                  </div>
+
+                  <div class="form-field">
+                              <label for="address1">Address Line 1</label>
+                              <input type="text" th:value="${userDetails.address_line1}" id="address1" name="address1" required>
+                          </div>
+              
+                          <div class="form-field">
+                              <label for="address2">Address Line 2</label>
+                              <input type="text" th:value="${userDetails.address_line2}" id="address2" name="address2" required>
+                          </div>
+
+                  <div class=form-field>
+                                <label for="state">State</label>
+                               <select  id="state" style="padding: 5px; padding-inline: 2px;"
+              name="state" required onchange="loadCities(this.value);">
+              <option th:selected="${myData.state_id == userDetails.stateId}" th:value="${myData.state_id}" th:each="myData : ${stateList}" th:text="${myData.state_name}"></option>
+            </select> 
+                            </div>
+
+
+
+                  <div class=form-field>
+                                <label for="state">City</label>
+                                <select  id="city" style="padding: 5px; padding-inline: 2px;"
+              name="city" required onchange="loadLocations(this.value);">
+              <option th:if="${myData.city_id == userDetails.city_id ? selected : ''}" th:value="${myData.city_id}" th:each="myData : ${cityList}" th:text="${myData.city_name}"></option>
+            </select> 
+                            </div>
+                            
+                             <div class=form-field>
+                                <label for="state">Preferred Place</label>
+                                <select  id="location" style="padding: 5px; padding-inline: 2px;" required="required">
+              <option th:selected="${myData.location_id == userDetails.location_id}" th:value="${myData.location_id}" th:each="myData : ${locationData}" th:text="${myData.location_name}"></option>
+            </select> 
+                            </div>
+                            
+                            
+              
+                          <div class="form-field">
+                              <label for="pin">Pincode</label>
+                              <input id="login-pin" th:value="${userDetails.zipcode}" type="tel" placeholder=""  required>
+                          </div>
+                          <!--<div class="edit-profile-photo  form-field">
+                            <label>Upload Photo</label>
+                            <input type="file" name="imageFile">
+                          </div>-->
+
+                      </div>
+                  </div>
+              
+                  <div class="button-container">
+                      <button id="edit-profile-submit" type=submit>Save</button>
+                  </div>
+              </form>
+
+          </div>
+          
+      </div>
+
+    </div>
+  </div>
+  
+  <!-- ======= Footer ======= -->
+            <footer id="footer"  th:include="footer-1 :: included-footer"></footer>
+  
+  <!-- End Footer -->
+    <div id="loadTemplate" th:attr="template-url=@{/user/loadTemplate}"></div>
+  
+  </main>
+
+  
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script th:src="@{/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+  <script th:src="@{/assets/vendor/aos/aos.js}"></script>
+  <script th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+  
+  <!-- Breadcrumbs Carousel Necessary Scripts -->
+<!-- Add jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Add Slick Carousel JS -->
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<!-- Your custom script -->
+<script>
+  $(document).ready(function(){
+    $('.slick-carousel').slick({
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 2300 // Adjust the speed as per your requirement (in milliseconds)
+    });
+  });
+</script>
+ <!-- Breadcrumbs Carousel Necessary Scripts Above -->
+
+  
+  <script>
+    // Get dropdown elements
+    var dropdownButton = document.getElementById("dropdownButton");
+    var dropdownContent = document.querySelector(".dropdown-content");
+ 
+    // Toggle display of dropdown content on button click
+    dropdownButton.addEventListener("click", function () {
+        if (dropdownContent.style.display === "block") {
+            dropdownContent.style.display = "none";
+        } else {
+            dropdownContent.style.display = "block";
+        }
+    });
+ </script>
+  <!-- Template Main JS File -->
+  <script th:src="@{/assets/js/main.js}"></script>
+  <script th:src="@{/assets/js/studentEditProfile.js}"></script>
+  <script>
+    var checkList = document.getElementById('list1');
+    var items = checkList.getElementsByClassName('checkbox');
+    var anchor = checkList.getElementsByClassName('anchor')[0];
+
+    // Update the dropdown list anchor text when a checkbox is clicked
+    for (var i = 0; i < items.length; i++) {
+        items[i].addEventListener('click', function(evt) {
+            updateAnchorText();
+            limitCheckboxes();
+        });
+    }
+
+    // Function to update the dropdown list anchor text
+    function updateAnchorText() {
+        var selectedItems = [];
+        for (var i = 0; i < items.length; i++) {
+            if (items[i].checked) {
+                selectedItems.push(items[i].parentNode.textContent.trim());
+            }
+        }
+        anchor.textContent = selectedItems.join(', ') || 'Select Interests';
+    }
+
+    function limitCheckboxes() {
+        var checkboxes = document.querySelectorAll('.checkbox');
+        var checkedCount = 0;
+        var maxChecked = 5;
+
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                checkedCount++;
+                if (checkedCount > maxChecked) {
+                    checkboxes[i].checked = false; // Unselect the checkbox if the limit is exceeded
+                    checkedCount--;
+                    alert('You can only select up to 5 checkboxes.');
+                }
+            }
+        }
+
+        // Disable additional checkboxes if 5 are already selected
+        if (checkedCount >= maxChecked) {
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (!checkboxes[i].checked) {
+                    checkboxes[i].disabled = true;
+                }
+            }
+        } else {
+            // Enable all checkboxes if less than 5 are selected
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].disabled = false;
+            }
+        }
+    }
+
+    anchor.onclick = function (evt) {
+        if (checkList.classList.contains('visible'))
+            checkList.classList.remove('visible');
+        else
+            checkList.classList.add('visible');
+    }
+  </script>
+  <script>
+     document.addEventListener("DOMContentLoaded", function() {
+            var pincodeEl = document.getElementById("login-pin");
+
+            pincodeEl.addEventListener("blur", function() {
+                var inputValue = pincodeEl.value;
+                // Remove non-numeric characters
+                inputValue = inputValue.replace(/\D/g, '');
+
+                if (inputValue.startsWith('0')) {
+                    // Remove the leading zero
+                    inputValue = inputValue.slice(1);
+                }
+                if(inputValue.length < 6 || inputValue.length > 6 ){
+                    pincodeEl.value = "";
+                    alert("please enter correct pincode");
+                }
+                else{
+                    // Update the input field value
+                    pincodeEl.value = inputValue;
+                }
+                
+            });
+          });
+  </script>
+  
+ 
+</body>
+
+</html>

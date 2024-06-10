@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head  th:include="employer/header-head :: included-head"></head>
+
+<body>
+  <!-- ======= Header ======= -->
+        <header  id="header" class="fixed-top" th:include="employer/header :: included-content"></header>
+  <!-- End Header -->
+  <main id="main">
+ <!-- ======= Breadcrumbs ======= -->
+	    <div class="breadcrumbs" data-aos="fade-in">
+	      <div class="container">
+	        <h2>Employer Applicant's</h2>
+	        <div class="slick-carousel">
+	         <p>"Your most unhappy customers are your greatest source of learning." - Bill Gates</p>
+	         <p>"Part-time employees bring a fresh perspective and valuable skills to the table, contributing to the success of any team." </p>
+	         <p>"Hiring part-time workers can be a strategic move, offering businesses the ability to adapt quickly to changing needs." </p>
+	         <p>"Embrace the power of part-time talent; it's not about the hours worked, but the impact made." </p>
+	         <p>"Sometimes, greatness comes in part-time packages – hire for passion, dedication, and results." </p>
+	         <p>"Unlock the potential of part-time hires; they bring unique perspectives and a dynamic approach to the workplace." </p>
+	         <p>"Quality part-time employees don't watch the clock; they focus on what counts and deliver exceptional outcomes."</p>
+	         <p>"Smart companies recognize that part-time roles can be filled with full-time dedication and commitment."</p>
+	         <p>"Part-time positions create opportunities for individuals to pursue passions outside of work, leading to a more fulfilled and motivated team."</p>
+	         <p>"Quality over quantity: part-time employees can deliver exceptional results without the need for a full-time commitment."</p>
+	         <!-- Add more <p> elements with additional text -->
+	       </div>   
+	      </div>
+	    </div>
+	  <!-- End Breadcrumbs -->
+
+  <div class="employer-postjobs-container">
+    <div class="root">
+        <div class="bottom-bar">
+
+            <div class="bottom-header-bar">
+                <div class="bar-left-item">
+                    <span class="display-font-style">Job Applications</span>
+                </div>
+                <div class="bar-right-item-1">
+                    <!-- <button class="display-font-style">View More</button> -->
+                    <!-- <i class="fa-regular fa-bell"></i> -->
+                    <button type="button" class="icon-button-1" onclick="clickToShowViewAll()">
+                      <span><i class="fa-regular fa-bell"></i></span>
+                      <span id="notification-color" class="icon-button__badge" th:text="${#lists.size(applicants.?[is_employer_viewed == false])}"></span>                      
+                    </button>
+                    <span id="showHideView" block><a class="view-all-content">View All</a></span>
+                </div>
+            </div>
+
+            <div class="bottom-table">
+                <table id="example" class="table table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <!-- <th>S. No</th> -->
+                            <th>Job Unique Code</th>
+                            <th>Job Name</th>
+                            <th>Applicant Name</th>
+                            <th>Applicant Email</th>
+                            <th>Applicant Phone</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="myRecord,itt : ${applicants}">
+                           <!-- <td th:text="${itt.count}"></td> -->
+                           <td style="width: 17%"> <a href="javascript:void(0);" th:onclick="'viewJobDetails('+${myRecord.employer_job_detail_id}+')'" th:text="${myRecord.unique_job_code==null ? 'view' : myRecord.unique_job_code}">View</a> </td>
+                            <td th:text="${myRecord.jobtype_name}"></td>
+                             <td th:text="${myRecord.applicant_name}"></td>
+                            <td th:text="${myRecord.email}"></td>
+                             <td> 
+                             <span th:if="${myRecord.job_status == 'Short-Listed' or myRecord.employer_job_detail_id==0}" th:text="${myRecord.appilcant_phone}"></span>
+                             <span th:if="${myRecord.job_status != 'Short-Listed' and myRecord.employer_job_detail_id!=0}">**********</span>
+                              </td>
+                            <td>
+                            <input type="hidden" th:id="'applicantView'+${itt.count}" th:value="${myRecord.is_employer_viewed}">
+                            <button style="min-width:fit-content; max-width: 40%;" class="view-button" th:onclick="'viewApplicant('+${itt.count}+','+${myRecord.is_employer_viewed}+','+${myRecord.student_job_applied}+')'" >View &nbsp; <span th:if="${myRecord.is_employer_viewed == false}" th:id="'iconView'+${itt.count}"> <i class="fa-solid fa-bell"></i> </span> </button>
+                                <button style="min-width:fit-content; max-width: 40%;" th:if="${myRecord.job_status=='Short-Listed' or myRecord.employer_job_detail_id==0}" class="delete-button" th:onclick="'deleteApplicantNotPossible()'">Delete</button>
+                                <button style="min-width:fit-content; max-width: 40%;" th:if="${myRecord.job_status=='Applied' and myRecord.employer_job_detail_id!=0}" class="delete-button" th:onclick="'deleteApplicant('+${myRecord.student_job_applied}+')'">Delete</button>
+                                <button style="min-width:fit-content; max-width: 40%;" th:if="${myRecord.job_status=='Rejected'}" class="delete-button" th:onclick="'alreadyDeleteApplicant()'">Delete</button></td>
+                                
+                        </tr>
+                        
+                        
+                        
+                                  
+                    </tbody>
+                    <tfoot>
+                        <!-- <tr>
+                            <th>Job Name</th>
+                            <th>Job Location</th>
+                            <th>Job Type</th>
+                            <th>Salary</th>
+                            <th>Action</th>
+                        </tr> -->
+                    </tfoot>
+                </table>
+            </div>
+
+            <!-- The Modal -->
+            <div th:each="myRecord,ittr : ${applicants}">
+            <div th:id="${ittr.count}" class="modal">
+
+                <!-- Modal content -->
+                <div class="modal-content-1">
+                <span class="close" th:onclick="'closeModel('+${ittr.count}+')'">&times;</span>
+                <div class="flex">
+                    <span><b>Full Name</b>:</span>
+                    <span th:text="${myRecord.applicant_name}"></span>
+                </div>
+                <hr>
+                <span><b>Email</b>: <span th:text="${myRecord.email}"></span> </span><br>
+                <span><b>Gender</b>: <span th:text="${myRecord.gender}"></span></span><br>
+                <span><b>Age</b>: <span th:text="${myRecord.age}"></span> Years's</span><br>
+                <span><b>Address</b>: <span th:text="${myRecord.address_line1+','+myRecord.address_line2}"></span></span><br>
+               <span><b>Preferred Location</b>: <span th:text="${myRecord.location_name}"></span></span><br>
+                <span><b>City</b>: <span th:text="${myRecord.city_name}"></span></span><br>
+                <span><b>State</b>: <span th:text="${myRecord.state_name}"></span></span><br>
+                <span><b>Pincode</b>: <span th:text="${myRecord.pincode}"></span></span><br>
+                <span><b>Qualification</b>: <span th:text="${myRecord.qualification}"></span></span><br>
+                <p><b>Skills</b>: <span th:text="${myRecord.skill}"></span></p><br>
+                <button th:if="${myRecord.job_status != 'Short-Listed' and myRecord.employer_job_detail_id!=0}" class="btn" th:onclick="'shortListApplicant('+${myRecord.student_job_applied}+')'">Short-List</button>
+                <button th:if="${myRecord.job_status == 'Short-Listed' or myRecord.employer_job_detail_id==0}" class="btn" th:onclick="'alreadyShortListed()'" disabled="disabled" style="color: white">ShortListed</button>
+                <button class="btn" th:onclick="'closeModel('+${ittr.count}+')'">Cancel</button>
+                </div>
+            
+            </div>
+            </div>
+
+        </div>
+    </div>
+  </div>
+  
+  <!-- ======= Footer ======= -->
+       <footer id="footer"  th:include="footer-1 :: included-footer"></footer>
+<!-- End Footer -->
+       <div id="deleteApplicant" th:attr="student-job-delete-url=@{/employer/deleteApplicant}"></div>
+       <div id="shortListApplicant" th:attr="short-list-student-url=@{/employer/shortListApplicant}"></div>
+       <div id="updateView" th:attr="update-view-url=@{/employer/updateIsViewed}"></div>
+       
+       <form th:action="@{/employer/jobAction}" th:hidden="hidden" th:id="jobActionForm" th:method="POST">
+<input type="hidden" id="jobId" name="jobId">
+<input type="hidden" id="flag" name="flag">
+</form>
+  </main>
+
+  
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script th:src="@{/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+  <script th:src="@{/assets/vendor/aos/aos.js}"></script>
+  <script th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+  
+  <!-- Breadcrumbs Carousel Necessary Scripts -->
+<!-- Add jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Add Slick Carousel JS -->
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<!-- Your custom script -->
+<script>
+  $(document).ready(function(){
+    $('.slick-carousel').slick({
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 2300 // Adjust the speed as per your requirement (in milliseconds)
+    });
+  });
+</script>
+ <!-- Breadcrumbs Carousel Necessary Scripts Above -->
+
+  <script>
+    // Get dropdown elements
+    var dropdownButton = document.getElementById("dropdownButton");
+    var dropdownContent = document.querySelector(".dropdown-content");
+ 
+    // Toggle display of dropdown content on button click
+    dropdownButton.addEventListener("click", function () {
+        if (dropdownContent.style.display === "block") {
+            dropdownContent.style.display = "none";
+        } else {
+            dropdownContent.style.display = "block";
+        }
+    });
+ </script>
+  <!-- Template Main JS File -->
+  <script th:src="@{/assets/js/main.js}"></script>
+  <script th:src="@{/assets/js/applicants.js}"></script>
+  <script>
+    new DataTable('#example');
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      let checkClickEvent = true;
+      let showHideViewEl = document.getElementById("showHideView");
+      showHideViewEl.style.display = "none";
+
+    // Wait for the DOM content to be fully loaded
+    const button = document.querySelector(".icon-button-1");
+      
+    button.addEventListener("click", function() {
+        clickToShowViewAll();
+    });
+
+    function clickToShowViewAll() {
+      if (checkClickEvent == false){
+        let showHideViewEl = document.getElementById("showHideView");
+        showHideViewEl.style.display = "none";  // Use "none" to hide the element
+        checkClickEvent = true;
+        // showHideViewEl.classList.toggle("stop");
+      }
+      else if(checkClickEvent == true){
+        let showHideViewEl = document.getElementById("showHideView");
+        showHideViewEl.style.display = "block";  // Use "none" to hide the element
+        checkClickEvent = false;
+        // showHideViewEl.classList.toggle("stop");
+      }
+        
+    }
+});
+
+</script>
+</body>
+
+</html>

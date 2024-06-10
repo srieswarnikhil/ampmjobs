@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="header-head :: included-head"></head>
+
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top" th:include="common/header :: included-content"></header>
+  <!-- End Header -->
+
+
+  <main id="main">
+
+    <!---employee payment page-->
+
+    <div class="form-body">
+      <form class="login-form" id="paymentFormId">
+
+        <h3>Payment Details</h3>
+        
+        <h5 th:if="${isError == 'error'}" style="color: indianred;"> Something went wrong while doing payment.</h5>
+        
+
+        <div class="payment-details" th:if="${pod.isDiscountApplicable==false}">
+          <select th:disabled="disabled">
+            <option th:value="${companyType}" th:text="${companyType}"></option>
+          </select> <select id="payment-type-select" required>
+            <option value="" disabled selected>Subscription Duration</option>
+
+<option th:each="myData : ${masterPayList}" th:value="${myData.paymentLookupId}"
+        th:text="${myData.paymentType + ' - ' + myData.paymentAmountText}"></option>
+
+            
+            </select>
+
+        </div>
+        
+         <div  th:if="${pod.isDiscountApplicable==true}">
+                <div class="payment-details">
+                <span> <strong> Subscription Duration : </strong> <span th:text="${pod.duration}"></span>  </span>  
+                <span><strong>Registration Fee: </strong><span th:text="${'₹'+pod.regFee}"></span>.00/-</span>
+                </div>
+                <div class="payment-details">
+                <span><strong> Discount (in %) :</strong> <span th:text="${pod.discountPercentage}"></span>  </span>
+                <span><strong>Effective Registration Fee:</strong> <span th:text="${'₹'+pod.effectiveAmount}"></span>.00/-</span>
+                </div>
+                <input type="hidden" id="payment-type-select" th:value="${pod.masterPaymentId}">
+            </div>
+        
+        <button id="login-button" type="submit">Proceed for Payment</button>
+
+        <div class="progress-bar">
+          <span>Registration page 4 of 5</span>
+        </div>
+      </form>
+
+    </div>
+
+  </main>
+  <!-- ======= Footer ======= -->
+  <footer id="footer" th:include="footer :: included-footer"></footer>
+
+  <!-- End Footer -->
+
+  <div id="erAddInfo" th:attr="er-data-url=@{/employer/validatePayment}"></div>
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script th:src="@{/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+  <script th:src="@{/assets/vendor/aos/aos.js}"></script>
+  <script th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+
+  <!-- Template Main JS File -->
+  <script th:src="@{/assets/js/main.js}"></script>
+  <script th:src="@{/assets/js/employerPayment.js}"></script>
+
+</body>
+
+</html>

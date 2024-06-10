@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="admin/header-head :: included-head"></head>
+<head>
+<style type="text/css">
+
+
+.searchInput {
+	width: 35%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+.autocomplete-items {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	width: 100%;
+	z-index: 999;
+	border: 1px solid #ccc;
+	border-top: none;
+	background-color: #fff;
+	max-height: 150px;
+	overflow-y: auto;
+}
+
+.autocomplete-item {
+	padding: 10px;
+	cursor: pointer;
+}
+
+.autocomplete-item:hover {
+	background-color: #f4f4f4;
+}
+</style>
+</head>
+
+
+<body>
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top" th:include="admin/header :: included-content"></header>
+
+  <!-- End Header -->
+  <main id="main">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+
+
+
+
+    <div align="center" class="login-form" id="discountForm" style="width: 90%;">
+      <h3 style="text-align: center;">
+        <strong>Employer - Recruiter Relation Details</strong>
+      </h3>
+<br><br>
+      <div>
+        Employer Details: <input width="100%" class="searchInput" type="text" id="erIn" placeholder="Type to search">
+        <div id="autocompleteItems"></div>
+<br><br>
+        Recruiter Details: <input width="100%" class="searchInput" type="text" id="reIn" placeholder="Type to search">
+        <div id="reItems"></div>
+        
+        <br><br>
+
+<button class="btn" type="button" th:onclick="doAssign();"> Assign</button>
+<button  class="btn" type="button" th:onclick="reset();"> Reset</button>
+      </div>
+
+    </div>
+    <br>
+    <br>
+    <div id="getSR" th:attr="sr-url=@{/admin/getEmailAndPhone}"></div>
+  </main>
+
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script th:src="@{/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+  <script th:src="@{/assets/vendor/aos/aos.js}"></script>
+  <script th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+
+  <!-- Breadcrumbs Carousel Necessary Scripts -->
+  <!-- Add jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+  <!-- Add Slick Carousel JS -->
+  <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+
+  <!-- Template Main JS File -->
+  <script th:src="@{/assets/js/main.js}"></script>
+  <script th:src="@{/assets/js/adminActivities.js}"></script>
+
+
+  <script type="text/javascript">
+    
+    
+    var searchInput = document.getElementById("erIn");
+    var autocompleteItems = document.getElementById("autocompleteItems");
+	var srUrl = document.getElementById('getSR').getAttribute('sr-url');
+
+    searchInput.addEventListener("input", function() {
+        var query = this.value.trim();
+
+        // Clear previous autocomplete items
+        autocompleteItems.innerHTML = "";
+        if (query.length >= 3) {
+        
+        	$.ajax({
+    			type: 'GET',
+    			url: srUrl,
+    			data: { inData: query },
+    			success: function(data) {
+    				debugger;
+    				if (data.length > 0) {
+                        data.forEach(function(item) {
+                            var autocompleteItem = document.createElement("div");
+                            autocompleteItem.classList.add("autocomplete-item");
+                            autocompleteItem.textContent = item;
+                            autocompleteItem.addEventListener("click", function() {
+                                searchInput.value = item;
+                                autocompleteItems.innerHTML = "";
+                            });
+                            autocompleteItems.appendChild(autocompleteItem);
+                        });
+                    } else {
+                        var noResultItem = document.createElement("div");
+                        noResultItem.classList.add("autocomplete-item");
+                        noResultItem.textContent = "No results found";
+                        autocompleteItems.appendChild(noResultItem);
+                    }
+    				autocompleteItems.style.display = "block";
+    			},
+    			error: function() {
+    				console.error('Error fetching search results');
+    			}
+    		});
+        }
+        else {
+            // Hide autocomplete dropdown if input length is less than the minimum character limit
+            autocompleteItems.style.display = "none";
+        }
+               // Show or hide autocomplete dropdown based on input value
+    });
+
+    
+    
+    
+    var reInData = document.getElementById("reIn");
+    var reItems = document.getElementById("reItems");
+
+    reInData.addEventListener("input", function() {
+        var query = this.value.trim();
+
+        // Clear previous autocomplete items
+        reItems.innerHTML = "";
+        if (query.length >= 3) {
+        
+        	$.ajax({
+    			type: 'GET',
+    			url: srUrl,
+    			data: { inData: query },
+    			success: function(data) {
+    				debugger;
+    				if (data.length > 0) {
+                        data.forEach(function(item) {
+                            var autocompleteItem = document.createElement("div");
+                            autocompleteItem.classList.add("autocomplete-item");
+                            autocompleteItem.textContent = item;
+                            autocompleteItem.addEventListener("click", function() {
+                                reInData.value = item;
+                                reItems.innerHTML = "";
+                            });
+                            reItems.appendChild(autocompleteItem);
+                        });
+                    } else {
+                        var noResultItem = document.createElement("div");
+                        noResultItem.classList.add("autocomplete-item");
+                        noResultItem.textContent = "No results found";
+                        reItems.appendChild(noResultItem);
+                    }
+    				reItems.style.display = "block";
+    			},
+    			error: function() {
+    				console.error('Error fetching search results');
+    			}
+    		});
+        }
+        else {
+            // Hide autocomplete dropdown if input length is less than the minimum character limit
+            reItems.style.display = "none";
+        }
+               // Show or hide autocomplete dropdown based on input value
+    });
+
+    
+    </script>
+
+</body>
+</html>

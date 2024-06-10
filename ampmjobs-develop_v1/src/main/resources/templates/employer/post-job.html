@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="employer/header-head :: included-head">
+
+
+
+</head>
+
+
+<head>
+<link rel="stylesheet" th:href="@{https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css}">
+  <script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"></script>
+  <script th:src="@{https://code.jquery.com/ui/1.12.1/jquery-ui.js}"></script>
+</head>
+
+<body>
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top" th:include="employer/header :: included-content"></header>
+
+  <!-- End Header -->
+  <main id="main">
+    	<!-- ======= Breadcrumbs ======= -->
+	    <div class="breadcrumbs" data-aos="fade-in">
+	      <div class="container">
+	        <h2>Employer Post Jobs</h2>
+	        <div class="slick-carousel">
+	         <p>"Your most unhappy customers are your greatest source of learning." - Bill Gates</p>
+	         <p>"Part-time employees bring a fresh perspective and valuable skills to the table, contributing to the success of any team." </p>
+	         <p>"Hiring part-time workers can be a strategic move, offering businesses the ability to adapt quickly to changing needs." </p>
+	         <p>"Embrace the power of part-time talent; it's not about the hours worked, but the impact made." </p>
+	         <p>"Sometimes, greatness comes in part-time packages – hire for passion, dedication, and results." </p>
+	         <p>"Unlock the potential of part-time hires; they bring unique perspectives and a dynamic approach to the workplace." </p>
+	         <p>"Quality part-time employees don't watch the clock; they focus on what counts and deliver exceptional outcomes."</p>
+	         <p>"Smart companies recognize that part-time roles can be filled with full-time dedication and commitment."</p>
+	         <p>"Part-time positions create opportunities for individuals to pursue passions outside of work, leading to a more fulfilled and motivated team."</p>
+	         <p>"Quality over quantity: part-time employees can deliver exceptional results without the need for a full-time commitment."</p>
+	         <!-- Add more <p> elements with additional text -->
+	       </div>   
+	      </div>
+	    </div>
+	  <!-- End Breadcrumbs -->
+
+
+    <div class="employer-postjobs-container">
+      <div class="root">
+
+        <div class="profile">
+
+          <div class="profile-top-bar">
+            <span>post Job</span>
+          </div>
+
+          <div class="profile-form" th:if="${jobFlag !=3}">
+
+            <form method="post" th:action="@{/employer/postNewJob}" th:object="${jobDetails}" id="jobPostForm">
+
+              <div class="form-field-container">
+
+
+                <div class="form-section">
+                  <div class="form-field">
+                    <label for="jobName">Job Name</label> <select th:if="${jobFlag !=1 and jobFlag !=2}" class="post-jobs-select-design" id="jobName"
+                      name="jobtype_id" required>
+                      <option value="" selected disabled hidden="">Select Job Name</option>
+                      <option th:each="myData : ${jobNames}" th:value="${myData.jobtype_id}" th:data-long_dec='${myData.jobtype_longdesc}'
+                        th:text="${myData.jobtype_name}"></option>
+
+                    </select> <select th:if="${jobFlag==1}" class="post-jobs-select-design" id="jobName" name="jobtype_id" required>
+                      <option th:if="${myData.jobtype_id == jobDetails.jobtype_id}" th:each="myData : ${jobNames}" th:value="${myData.jobtype_id}"
+                        th:data-long_dec='${myData.jobtype_longdesc}' th:text="${myData.jobtype_name}"></option>
+                    </select> <select th:if="${jobFlag==2}" class="post-jobs-select-design" id="jobName" name="jobtype_id" required>
+                      <option th:selected="${myData.jobtype_id == jobDetails.jobtype_id}" th:each="myData : ${jobNames}"
+                        th:value="${myData.jobtype_id}" th:data-long_dec='${myData.jobtype_longdesc}' th:text="${myData.jobtype_name}"></option>
+                    </select>
+                  </div>
+
+
+
+                  <div class="form-field">
+                    <label for="jobType">Job Type</label> <select class="post-jobs-select-design" id="jobType" name="job_type" required>
+                      <option th:if="${jobFlag !=1 and jobFlag !=2}" value="" selected disabled hidden="hidden">Select Job Type</option>
+                      <!--<option th:selected="${'Daily' == jobDetails.job_type}" value="Daily">Daily</option>-->
+                      <option th:selected="${'Day Shift' == jobDetails.job_type}" value="Day Shift">Day Shift</option>
+                      <option th:selected="${'Night Shift' == jobDetails.job_type}" value="Night Shift">Night Shift</option>
+                      <option th:selected="${'Part time' == jobDetails.job_type}" value="Part time">Part-Time</option>
+                      <option th:selected="${'Internship' == jobDetails.job_type}" value="Internship">Internship</option>
+                      <!--<option th:selected="${'General Shift' == jobDetails.job_type}" value="General Shift">General Shift</option>-->
+                      
+                      
+                      
+                      <!--<option th:selected="${'Shift' == jobDetails.job_type}" value="Shift">Shift</option>-->
+
+                    </select>
+
+                  </div>
+
+                  <div class="form-field">
+                    <label for="contactName">Contact Name</label> <input class="charAndDot" maxlength="50" type="text" id="contactName"
+                      th:value="${jobDetails.contact_name}" name="contact_name" placeholder="Contact Name" required>
+                  </div>
+
+                  <div class="form-field">
+                    <label for="contactNumber">Contact Number</label> <input class="onlyNum" maxlength="10" type="tel" id="contactNumber"
+                      name="contact_number" th:value="${jobDetails.contact_number}" required>
+                  </div>
+
+                  <div class="form-field">
+                    <label for="LOCATION">Location</label> <select class="post-jobs-select-design" name="location" id="cityId" required>
+                      <option th:if="${jobFlag !=1 and jobFlag !=2}" value="" selected disabled hidden="hidden">Select Location</option>
+                      <option th:selected="${myData.location_id == jobDetails.location}" th:each="myData : ${locationData}"
+                        th:value="${myData.location_id}" th:text="${myData.location_name}"></option>
+
+                    </select>
+
+                  </div>
+
+                  <div class="form-field">
+                    <label>Gender</label> <select class="post-jobs-select-design" id="genderId" name="gender" required="required">
+                      <option th:if="${jobFlag !=1 and jobFlag !=2}" value="" selected disabled hidden="hidden">Select Gender</option>
+                      <option th:selected="${jobDetails.gender == 'Male'}">Male</option>
+                      <option th:selected="${jobDetails.gender == 'Female'}">Female</option>
+                      <option th:selected="${jobDetails.gender == 'Male & Female'}">Male & Female</option>
+                      <option th:selected="${jobDetails.gender == 'Others'}">Others</option>
+                    </select>
+                  </div>
+
+                  <div class="form-field">
+                    <label>Pay - Hourly/Shift/Daily/Weekly</label> <select class="post-jobs-select-design" id="payType" name="payment_method"
+                      required="required">
+                      <option th:if="${jobFlag !=1 and jobFlag !=2}" value="" disabled selected hidden="hidden">Select your option</option>
+                      <option th:selected="${jobDetails.payment_method == 'Pay Hour'}">Pay Hour</option>
+                      <option th:selected="${jobDetails.payment_method == 'Pay Shift'}">Pay Shift</option>
+                      <option th:selected="${jobDetails.payment_method == 'Pay Day'}">Pay Day</option>
+                      <option th:selected="${jobDetails.payment_method == 'Pay Week'}">Pay Week</option>
+                    </select>
+                  </div>
+
+                  <div class="form-field">
+                    <label for="payAmount">Amount</label> <input maxlength="6" class="onlyNum" type="text"
+                      th:value="${jobDetails.amount>0 ? jobDetails.amount : ''}" name="amount" id="payAmount" required>
+                  </div>
+
+                  <div class="form-field">
+                    <label for="positionsNum">Vacant Positions</label> <input maxlength="6" class="onlyNum" type="text"
+                      th:value="${jobDetails.total_positions>0 ? jobDetails.total_positions : ''}" name="total_positions" id="positionsNum" required>
+                  </div>
+
+                  <div class="form-field">
+                    <label>Qualification</label> <select class="post-jobs-select-design" required name="qualification">
+                      <option th:if="${jobFlag !=1 and jobFlag !=2}" value="" disabled selected hidden="hidden">Select Qualification</option>
+                      <option th:selected="${jobDetails.qualification == 'Graduate'}">Graduate</option>
+                      <option th:selected="${jobDetails.qualification == 'Under Graduate'}">Under Graduate</option>
+                      <option th:selected="${jobDetails.qualification == 'Any'}">Any</option>
+                    </select>
+                  </div>
+
+                  <div class="form-field">
+                    <label>Start Job Date:</label> <input type="date" th:value="${jobDetails.job_start_date}" id="start-job-date"
+                      name="job_start_date" placeholder="Start Job Date" required>
+                  </div>
+                  <div class="form-field">
+                    <label>End Job Date:</label> <input type="date" th:value="${jobDetails.job_end_date}" id="end-job-date" name="job_end_date"
+                      placeholder="End Job Date" required>
+                  </div>
+
+                  <div class="form-field">
+                    <label>Job Timings</label>
+                    <div class="time-container">
+
+
+                      <div class="fromtime-box">
+                        <select required="required" id="startTimePart1">
+                          <option value="">Start Time</option>
+                          <option th:selected="${jobDetails.jobStartTimePart1 == '00:00'}">00:00</option>
+                          <option th:selected="${jobDetails.jobStartTimePart1 == '01:00'}">01:00</option>
+                          <option th:selected="${jobDetails.jobStartTimePart1 == '02:00'}">02:00</option>
+                          <option th:selected="${jobDetails.jobStartTimePart1 == '03:00'}">03:00</option>
+                          <option th:selected="${jobDetails.jobStartTimePart1 == '04:00'}">04:00</option>
+                          <option th:selected="${jobDetails.jobStartTimePart1 == '05:00'}">05:00</option>
+                          <option th:selected="${jobDetails.jobStartTimePart1 == '06:00'}">06:00</option>
+                          <option th:selected="${jobDetails.jobStartTimePart1 == '07:00'}">07:00</option>
+                          <option th:selected="${jobDetails.jobStartTimePart1 == '08:00'}">08:00</option>
+                          <option th:selected="${jobDetails.jobStartTimePart1 == '09:00'}">09:00</option>
+                          <option th:selected="${jobDetails.jobStartTimePart1 == '10:00'}">10:00</option>
+                          <option th:selected="${jobDetails.jobStartTimePart1 == '11:00'}">11:00</option>
+                          <option th:selected="${jobDetails.jobStartTimePart1 == '12:00'}">12:00</option>
+                        </select>
+                      </div>
+                      <div class="time-box">
+                        <select required id="startTimePart2">
+                          <option th:selected="${jobDetails.jobStartTimePart2 == 'AM'}">AM</option>
+                          <option th:selected="${jobDetails.jobStartTimePart2 == 'PM'}">PM</option>
+                        </select>
+                      </div>
+                      <input th:if="${jobFlag == 1}" th:id="dbJobId" type="hidden" th:value="${jobDetails.employer_job_detail_id}"
+                        name="employer_job_detail_id">
+                      <div class="tuv">
+                        <p>::</p>
+                      </div>
+
+                      <div class="totime-box">
+                        <select required id="endTimePart1">
+                          <option value="">End Time</option>
+                          <option th:selected="${jobDetails.jobEndTimePart1 == '00:00'}">00:00</option>
+                          <option th:selected="${jobDetails.jobEndTimePart1 == '01:00'}">01:00</option>
+                          <option th:selected="${jobDetails.jobEndTimePart1 == '02:00'}">02:00</option>
+                          <option th:selected="${jobDetails.jobEndTimePart1 == '03:00'}">03:00</option>
+                          <option th:selected="${jobDetails.jobEndTimePart1 == '04:00'}">04:00</option>
+                          <option th:selected="${jobDetails.jobEndTimePart1 == '05:00'}">05:00</option>
+                          <option th:selected="${jobDetails.jobEndTimePart1 == '06:00'}">06:00</option>
+                          <option th:selected="${jobDetails.jobEndTimePart1 == '07:00'}">07:00</option>
+                          <option th:selected="${jobDetails.jobEndTimePart1 == '08:00'}">08:00</option>
+                          <option th:selected="${jobDetails.jobEndTimePart1 == '09:00'}">09:00</option>
+                          <option th:selected="${jobDetails.jobEndTimePart1 == '10:00'}">10:00</option>
+                          <option th:selected="${jobDetails.jobEndTimePart1 == '11:00'}">11:00</option>
+                          <option th:selected="${jobDetails.jobEndTimePart1 == '12:00'}">12:00</option>
+                        </select>
+                      </div>
+                      <div class="time-box">
+                        <select required id="endTimePart2">
+                          <option th:selected="${jobDetails.jobEndTimePart2 == 'AM'}">AM</option>
+                          <option th:selected="${jobDetails.jobEndTimePart2 == 'PM'}">PM</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-section">
+
+                  <div class="form-field">
+                    <label for="address1">Job Description</label>
+                    <textarea maxlength="2000" th:field="${jobDetails.job_description}" id="descText" rows="17" name="job_description"
+                      class="text-part" required></textarea>
+                  </div>
+                </div>
+
+                <div class="form-section">
+                  <div class="form-field">
+                    <label>Job Post Visible Date :</label>
+                     <!--<input type="text" th:value="${jobDetails.job_visible_date}" placeholder="yyyy-mm-dd" readonly="readonly" id="visibilityDate" name="job_visible_date" class="form-control">-->
+                     <input type="date" th:value="${jobDetails.job_visible_date}" placeholder="yyyy-mm-dd" id="visibilityDate" name="job_visible_date" class="form-control">
+                  </div>
+                  <div class="button-container-1">
+                	<button class="button-5" th:if="${jobFlag ==1}" id="edit-profile-submit" type=submit>Update Job</button>
+                	<button class="button-5" th:if="${jobFlag !=1}" id="edit-profile-submit" type=submit>Post Job</button>
+              	</div>
+                </div>
+                 
+
+              </div>
+
+              
+            </form>
+
+          </div>
+
+
+          <div class="profile-form" th:if="${jobFlag ==3}">
+
+            <form>
+
+              <div class="form-field-container">
+              
+              
+
+
+                <div class="form-section">
+                  
+                   <div class="form-field">
+                    <label for="jobName">Job Unique Code</label>
+                    <input type="text" readonly th:value="${jobDetails.unique_job_code}">
+                  </div>
+                  
+                  <div class="form-field">
+                    <label for="jobName">Job Name</label><select disabled class="post-jobs-select-design">
+                      <option th:if="${myData.jobtype_id == jobDetails.jobtype_id}" th:each="myData : ${jobNames}" th:text="${myData.jobtype_name}"></option>
+                    </select>
+                  </div>
+
+
+
+                  <div class="form-field">
+                    <label for="jobType">Job Type</label> <select disabled class="post-jobs-select-design">
+                      <option th:if="${'Daily' == jobDetails.job_type}">Daily</option>
+                      <option th:if="${'Day Shift' == jobDetails.job_type}">Day Shift</option>
+                      <option th:if="${'General Shift' == jobDetails.job_type}">General Shift</option>
+                      <option th:if="${'Internship' == jobDetails.job_type}">Internship</option>
+                      <option th:if="${'Night Shift' == jobDetails.job_type}">Night Shift</option>
+                      <option th:if="${'Part time' == jobDetails.job_type}">Part time</option>
+                      <option th:if="${'Shift' == jobDetails.job_type}">Shift</option>
+
+                    </select>
+
+                  </div>
+
+                  <div class="form-field">
+                    <label for="contactName">Contact Name</label> <input class="charAndDot" type="text" readonly th:value="${jobDetails.contact_name}">
+                  </div>
+
+                  <div class="form-field">
+                    <label for="contactNumber">Contact Number</label> <input type="tel" readonly th:value="${jobDetails.contact_number}" id="contactNumber">
+                  </div>
+
+                  <div class="form-field">
+                    <label for="LOCATION">Location</label> <select disabled class="post-jobs-select-design">
+                      <option th:if="${myData.location_id == jobDetails.location}" th:each="myData : ${locationData}"
+                        th:text="${myData.location_name}"></option>
+
+                    </select>
+
+                  </div>
+
+                  <div class="form-field">
+                    <label>Gender</label> <select disabled class="post-jobs-select-design">
+                      <option th:if="${jobDetails.gender == 'Male'}">Male</option>
+                      <option th:if="${jobDetails.gender == 'Female'}">Female</option>
+                      <option th:if="${jobDetails.gender == 'Male & Female'}">Male & Female</option>
+                      <option th:if="${jobDetails.gender == 'Others'}">Others</option>
+                    </select>
+                  </div>
+
+                  <div class="form-field">
+                    <label>Pay - Hourly/Shift/Daily/Weekly</label> <select class="post-jobs-select-design" disabled>
+                      <option th:if="${jobDetails.payment_method == 'Pay Hour'}">Pay Hour</option>
+                      <option th:if="${jobDetails.payment_method == 'Pay Shift'}">Pay Shift</option>
+                      <option th:if="${jobDetails.payment_method == 'Pay Day'}">Pay Day</option>
+                      <option th:if="${jobDetails.payment_method == 'Pay Week'}">Pay Week</option>
+                    </select>
+                  </div>
+
+                  <div class="form-field">
+                    <label for="payAmount">Amount</label> <input type="text" readonly th:value="${jobDetails.amount>0 ? jobDetails.amount : ''}" id="payAmount">
+                  </div>
+
+                  <div class="form-field">
+                    <label for="positionsNum">Vacant Positions</label> <input type="text" readonly
+                      th:value="${jobDetails.total_positions>0 ? jobDetails.total_positions : ''}" id="positionsNum">
+                  </div>
+
+                  <div class="form-field">
+                    <label>Qualification</label> <select disabled class="post-jobs-select-design">
+                      <option th:if="${jobDetails.qualification == 'Graduate'}">Graduate</option>
+                      <option th:if="${jobDetails.qualification == 'Under Graduate'}">Under Graduate</option>
+                    </select>
+                  </div>
+
+                  <div class="form-field">
+                    <label>Start Job Date:</label> <input type="date" readonly th:value="${jobDetails.job_start_date}">
+                  </div>
+                  <div class="form-field">
+                    <label>End Job Date:</label> <input type="date" readonly th:value="${jobDetails.job_end_date}">
+                  </div>
+
+                  <div class="form-field">
+                    <label>Job Timings</label>
+                    <div class="time-container">
+
+
+                      <div class="fromtime-box">
+                        <select  required="required" id="startTimePart1">
+                          <option th:if="${jobDetails.jobStartTimePart1 == '00:00'}">00:00</option>
+                          <option th:if="${jobDetails.jobStartTimePart1 == '01:00'}">01:00</option>
+                          <option th:if="${jobDetails.jobStartTimePart1 == '02:00'}">02:00</option>
+                          <option th:if="${jobDetails.jobStartTimePart1 == '03:00'}">03:00</option>
+                          <option th:if="${jobDetails.jobStartTimePart1 == '04:00'}">04:00</option>
+                          <option th:if="${jobDetails.jobStartTimePart1 == '05:00'}">05:00</option>
+                          <option th:if="${jobDetails.jobStartTimePart1 == '06:00'}">06:00</option>
+                          <option th:if="${jobDetails.jobStartTimePart1 == '07:00'}">07:00</option>
+                          <option th:if="${jobDetails.jobStartTimePart1 == '08:00'}">08:00</option>
+                          <option th:if="${jobDetails.jobStartTimePart1 == '09:00'}">09:00</option>
+                          <option th:if="${jobDetails.jobStartTimePart1 == '10:00'}">10:00</option>
+                          <option th:if="${jobDetails.jobStartTimePart1 == '11:00'}">11:00</option>
+                          <option th:if="${jobDetails.jobStartTimePart1 == '12:00'}">12:00</option>
+                        </select>
+                      </div>
+                      <div class="time-box">
+                        <select  id="startTimePart2">
+                          <option th:if="${jobDetails.jobStartTimePart2 == 'AM'}">AM</option>
+                          <option th:if="${jobDetails.jobStartTimePart2 == 'PM'}">PM</option>
+                        </select>
+                      </div>
+                      <div class="tuv">
+                        <p>::</p>
+                      </div>
+
+                      <div class="totime-box">
+                        <select  id="endTimePart1">
+                          <option th:if="${jobDetails.jobEndTimePart1 == '00:00'}">00:00</option>
+                          <option th:if="${jobDetails.jobEndTimePart1 == '01:00'}">01:00</option>
+                          <option th:if="${jobDetails.jobEndTimePart1 == '02:00'}">02:00</option>
+                          <option th:if="${jobDetails.jobEndTimePart1 == '03:00'}">03:00</option>
+                          <option th:if="${jobDetails.jobEndTimePart1 == '04:00'}">04:00</option>
+                          <option th:if="${jobDetails.jobEndTimePart1 == '05:00'}">05:00</option>
+                          <option th:if="${jobDetails.jobEndTimePart1 == '06:00'}">06:00</option>
+                          <option th:if="${jobDetails.jobEndTimePart1 == '07:00'}">07:00</option>
+                          <option th:if="${jobDetails.jobEndTimePart1 == '08:00'}">08:00</option>
+                          <option th:if="${jobDetails.jobEndTimePart1 == '09:00'}">09:00</option>
+                          <option th:if="${jobDetails.jobEndTimePart1 == '10:00'}">10:00</option>
+                          <option th:if="${jobDetails.jobEndTimePart1 == '11:00'}">11:00</option>
+                          <option th:if="${jobDetails.jobEndTimePart1 == '12:00'}">12:00</option>
+                        </select>
+                      </div>
+                      <div class="time-box">
+                        <select id="endTimePart2">
+                          <option th:if="${jobDetails.jobEndTimePart2 == 'AM'}">AM</option>
+                          <option th:if="${jobDetails.jobEndTimePart2 == 'PM'}">PM</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-section">
+
+                  <div class="form-field">
+                    <label for="address1">Job Description</label>
+                    <textarea readonly maxlength="2000" th:field="${jobDetails.job_description}" rows="17" class="text-part"></textarea>
+                  </div>
+                </div>
+
+                <div class="form-section">
+                  <div class="form-field">
+                    <label>Job Post Visible Date :</label> <input readonly type="text" th:value="${jobDetails.job_visible_date}" class="form-control">
+                  </div>
+                </div>
+
+              </div>
+
+            </form>
+
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" th:include="footer-1 :: included-footer"></footer>
+    <!-- End Footer -->
+
+    <div id="postJobUrl" th:attr="job-post-url=@{/employer/act/jobPost}"></div>
+
+  </main>
+
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script th:src="@{/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+  <script th:src="@{/assets/vendor/aos/aos.js}"></script>
+  <script th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+  
+  <!-- Breadcrumbs Carousel Necessary Scripts -->
+<!-- Add jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Add Slick Carousel JS -->
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<!-- Your custom script -->
+<script>
+  $(document).ready(function(){
+    $('.slick-carousel').slick({
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 2300 // Adjust the speed as per your requirement (in milliseconds)
+    });
+  });
+</script>
+ <!-- Breadcrumbs Carousel Necessary Scripts Above -->
+
+  <script>
+    // Get dropdown elements
+    var dropdownButton = document.getElementById("dropdownButton");
+    var dropdownContent = document.querySelector(".dropdown-content");
+ 
+    // Toggle display of dropdown content on button click
+    dropdownButton.addEventListener("click", function () {
+        if (dropdownContent.style.display === "block") {
+            dropdownContent.style.display = "none";
+        } else {
+            dropdownContent.style.display = "block";
+        }
+    });
+ </script>
+  <!-- Template Main JS File -->
+  <script th:src="@{/assets/js/main.js}"></script>
+  <script th:src="@{/assets/js/postJob.js}"></script>
+  <script th:src="@{/assets/js/validations.js}"></script>
+  
+  <script>
+
+    document.addEventListener("DOMContentLoaded", function() {
+            var phoneNumberInput = document.getElementById("contactNumber");
+
+            phoneNumberInput.addEventListener("blur", function() {
+                var inputValue = phoneNumberInput.value;
+                // Remove non-numeric characters
+                inputValue = inputValue.replace(/\D/g, '');
+
+                if (inputValue.startsWith('0')) {
+                    // Remove the leading zero
+                    inputValue = inputValue.slice(1);
+                }
+
+                // Check if the input value exceeds 10 digits
+                if(inputValue.length < 10 || inputValue.length > 10 ){
+                    phoneNumberInput.value = "";
+                    alert("please enter 10 digit mobile number");
+                }
+                else{
+                    // Update the input field value
+                    phoneNumberInput.value = inputValue;
+                }
+                
+            });
+            var positionsNumEl = document.getElementById("positionsNum");
+            positionsNumEl.addEventListener("input", function(){
+                let positionNumValue = positionsNumEl.value;
+                if(positionNumValue == 0){
+                    positionsNumEl.value = "";
+                    alert("vacancy positions cannot be 0 ")
+                }
+                else if(positionNumValue > 0){
+                    positionsNumEl.value = positionNumValue;
+                }
+            })
+            var payAmountEl = document.getElementById("payAmount");
+            payAmountEl.addEventListener("input", function(){
+                let payAmountValue = payAmountEl.value;
+                if(payAmountValue == 0){
+                    payAmountEl.value = "";
+                    alert("Amount cannot be 0 ")
+                }
+                else if(payAmountValue > 0){
+                    payAmountEl.value = payAmountValue;
+                }
+            })
+        });
+</script>
+  
+  <script>
+    const startDateInput = document.getElementById('start-job-date');
+    const endDateInput = document.getElementById('end-job-date');
+    startDateInput.addEventListener('change', function() {
+        const startDate = new Date(this.value);
+        endDateInput.min = this.value;
+        const maxEndDate = new Date(startDate);
+        maxEndDate.setDate(startDate.getDate() + 30);
+        const maxEndDateFormatted = maxEndDate.toISOString().split('T')[0];
+        endDateInput.max = maxEndDateFormatted;
+        if (new Date(endDateInput.value) < startDate) {
+            endDateInput.value = '';
+        }
+    });
+</script>
+ <script>
+ $(document).ready(function() {  
+ $("#visibilityDate").datepicker({
+	 dateFormat: "yy-mm-dd",
+     minDate: 0, // Set minimum date to today
+     maxDate: "+30D", // Set maximum date to 30 days from today
+     beforeShow: function(input, inst) {
+         inst.dpDiv.css({
+           marginTop: 0,
+           top: 'auto',
+           bottom: 0
+         });
+     }
+   });
+ });
+</script>
+</body>
+
+</html>

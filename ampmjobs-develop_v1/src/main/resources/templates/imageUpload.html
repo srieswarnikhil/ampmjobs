@@ -1,0 +1,11 @@
+<html  xmlns:th="http://www.thymeleaf.org">
+<body>
+
+  <form action="#" id="uploadForm" method="post" th:action="@{/home/upload}" enctype="multipart/form-data">
+    <input id="input-file" type="file" name="file" accept="image/png, image/jpeg" />
+    <button class="btn btn-sm btn-outline-success float-right" type="submit">Upload</button>
+  </form>
+</body>
+
+</html>
+

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head  th:include="employer/header-head :: included-head"></head>
+
+<body>
+  <!-- ======= Header ======= -->
+        <header  id="header" class="fixed-top" th:include="employer/header :: included-content"></header>
+ 
+  <!-- End Header -->
+  <main id="main">
+ <!-- ======= Breadcrumbs ======= -->
+	    <div class="breadcrumbs" data-aos="fade-in">
+	      <div class="container">
+	        <h2>Employer Job Posted</h2>
+	        <div class="slick-carousel">
+	         <p>"Your most unhappy customers are your greatest source of learning." - Bill Gates</p>
+	         <p>"Part-time employees bring a fresh perspective and valuable skills to the table, contributing to the success of any team." </p>
+	         <p>"Hiring part-time workers can be a strategic move, offering businesses the ability to adapt quickly to changing needs." </p>
+	         <p>"Embrace the power of part-time talent; it's not about the hours worked, but the impact made." </p>
+	         <p>"Sometimes, greatness comes in part-time packages – hire for passion, dedication, and results." </p>
+	         <p>"Unlock the potential of part-time hires; they bring unique perspectives and a dynamic approach to the workplace." </p>
+	         <p>"Quality part-time employees don't watch the clock; they focus on what counts and deliver exceptional outcomes."</p>
+	         <p>"Smart companies recognize that part-time roles can be filled with full-time dedication and commitment."</p>
+	         <p>"Part-time positions create opportunities for individuals to pursue passions outside of work, leading to a more fulfilled and motivated team."</p>
+	         <p>"Quality over quantity: part-time employees can deliver exceptional results without the need for a full-time commitment."</p>
+	         <!-- Add more <p> elements with additional text -->
+	       </div>   
+	      </div>
+	    </div>
+	  <!-- End Breadcrumbs -->
+
+  <div class="employer-jobsposted-container">
+    <div class="root">
+        <div class="bottom-bar">
+
+            <div class="bottom-header-bar">
+                <div class="bar-left-item">
+                    <span class="display-font-style">Jobs Posted</span>
+                </div>
+                <div class="bar-right-item">
+                    <!-- <button class="display-font-style">View More</button> -->
+                </div>
+            </div>
+
+            <div class="bottom-table">
+                <table id="example" class="table table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                        <!-- <th>S. No</th> -->
+                        <th>Job Unique Code</th>
+                            <th>Job Name</th>
+                            <th>Job Type</th>
+                            <th>Pay</th>
+                            <th>Job Description</th>
+                            <th>Vacant Positions</th>
+                            <th>No.of Positions Filled</th>
+                            <th>Remaining Positions</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-control" th:each="myRecord,ltItt : ${postedJobs}">
+                            <!-- <td th:text="${ltItt.count}"></td> -->
+                            <td style="width: 17%"> <a href="javascript:void(0);" th:onclick="'viewJobDetails('+${myRecord.employer_job_detail_id}+')'" th:text="${myRecord.unique_job_code}"></a> </td>
+                            <td th:text="${myRecord.jobtype_name}"></td>
+                             <td th:text="${myRecord.job_type}"></td>
+                             <td th:text="${myRecord.amount}"></td>
+                            <td style="width: 40%" class="description-control" th:text="${myRecord.job_description}"></td>
+                           <td th:text="${myRecord.total_positions}"></td>
+                            <td style="width: 15%"><input class="onlyNum" maxlength="6" th:id="${ltItt.count}" type="text" th:value="${myRecord.filled_positions}" style="width:40%;margin-left: 5px; margin-bottom: 10px;" />
+                            <button class="update-button" th:onclick="'updateFilledPositions('+${ltItt.count}+','+${myRecord.employer_job_detail_id}+')'">Update</button></td>
+                           <td th:text="${myRecord.ramining_positions}"></td>
+                            <td style="width: 18%">
+                            <button class="edit-button" th:onclick="'editPostedJob('+${myRecord.employer_job_detail_id}+')'">Edit</button>
+                            <button class="edit-button" th:onclick="'rePostJob('+${myRecord.employer_job_detail_id}+')'">Re-Post</button>
+                            </td>
+                        </tr>
+                                  
+                    </tbody>
+                    <tfoot>
+                        <!-- <tr>
+                            <th>Job Name</th>
+                            <th>Job Location</th>
+                            <th>Job Type</th>
+                            <th>Salary</th>
+                            <th>Action</th>
+                        </tr> -->
+                    </tfoot>
+                </table>
+            </div>
+
+          
+
+        </div>
+    </div>
+  </div>
+  
+  <!-- ======= Footer ======= -->
+       <footer id="footer"  th:include="footer-1 :: included-footer"></footer>
+<!-- End Footer -->
+
+   <div id="filled-positions" th:attr="positions-fill-url=@{/employer/updateFilledPositions}"></div>
+
+
+<form th:action="@{/employer/jobAction}" th:hidden="hidden" th:id="jobActionForm" th:method="POST">
+<input type="hidden" id="jobId" name="jobId">
+<input type="hidden" id="flag" name="flag">
+</form>
+  </main>
+
+  
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script th:src="@{/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+  <script th:src="@{/assets/vendor/aos/aos.js}"></script>
+  <script th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+  
+  <!-- Breadcrumbs Carousel Necessary Scripts -->
+<!-- Add jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Add Slick Carousel JS -->
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<!-- Your custom script -->
+<script>
+  $(document).ready(function(){
+    $('.slick-carousel').slick({
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 2300 // Adjust the speed as per your requirement (in milliseconds)
+    });
+  });
+</script>
+ <!-- Breadcrumbs Carousel Necessary Scripts Above -->
+
+  <!-- Template Main JS File -->
+  <script th:src="@{/assets/js/main.js}"></script>
+    <script th:src="@{/assets/js/validations.js}"></script>
+  <script>
+    // Get dropdown elements
+    var dropdownButton = document.getElementById("dropdownButton");
+    var dropdownContent = document.querySelector(".dropdown-content");
+ 
+    // Toggle display of dropdown content on button click
+    dropdownButton.addEventListener("click", function () {
+        if (dropdownContent.style.display === "block") {
+            dropdownContent.style.display = "none";
+        } else {
+            dropdownContent.style.display = "block";
+        }
+    });
+ </script>
+  <script>
+    function editPostedJob(employer_job_detail_id){
+      $("#jobId").val(employer_job_detail_id);
+      $("#flag").val(1);
+      $('#jobActionForm').submit();
+    }
+    
+    function rePostJob(employer_job_detail_id){
+    	$("#jobId").val(employer_job_detail_id);
+        $("#flag").val(2);
+        $('#jobActionForm').submit();
+      }
+    
+    function viewJobDetails(jobId){
+    	debugger;
+    	
+    	$("#jobId").val(jobId);
+        $("#flag").val(3);
+        $('#jobActionForm').attr('target', '_blank').submit();
+
+    	
+    }
+    
+    function updateFilledPositions(textId, jobId) {
+		debugger;
+		var countVal = $("#"+textId).val();
+		if(countVal==null || countVal.trim()=="" || countVal==0){
+			alert("Please enter No. of Positions Filled");
+			$("#"+textId).focus();
+			return false;
+		}
+		 var confirmLogOut = confirm("Are you sure you want to Update ?");
+	        if (confirmLogOut==false) {
+	        	return false;
+	        }
+		
+	     $("#ampm-loader").show();
+		 var myInData = {
+				 jobId : jobId,
+		         filledPositions : countVal,
+		      };
+		       
+		       var token = $("meta[name='_csrf']").attr("content");
+		       var header = $("meta[name='_csrf_header']").attr("content");
+		      var updateFilledPositionsUrl = document.getElementById('filled-positions').getAttribute('positions-fill-url');
+		       $.ajax({
+		         type : 'POST',
+		        contentType : 'application/json',
+		        url : updateFilledPositionsUrl,
+		        data : JSON.stringify(myInData),
+		        beforeSend: function(xhr) {
+		              xhr.setRequestHeader(header, token);
+		          },
+		        success: function(response) {
+		               debugger;
+		               if(response==1){
+		                  alert("Data updated successfully.");
+		                  location.reload();
+		                }
+		                
+		                else {
+		                  alert("Something went wrong, Please try later!!!");
+		                  $("#ampm-loader").hide();
+		                }
+		               
+		             },
+		             error: function(xhr, status, error) {
+		                 console.error('Error:', error);
+		                 $("#ampm-loader").hide();
+		             }
+		         });
+		
+	}
+  </script>
+  <script>
+    new DataTable('#example');
+</script>
+
+</body>
+
+</html>

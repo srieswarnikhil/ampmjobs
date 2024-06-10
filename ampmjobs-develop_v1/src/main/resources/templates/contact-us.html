@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+
+<head  th:include="header-head :: included-head"></head>
+
+
+<body>
+
+   <!-- ======= Header ======= -->
+      <header  id="header" class="fixed-top" th:include="common/header :: included-content"></header>
+
+  <!-- End Header -->
+
+ <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs" data-aos="fade-in">
+      <div class="container">
+        <h2>Contact us</h2>
+        <p>Any Student or organization interested in learning more about our service, can contact our Customer Care services, and our representative will be glad to address your needs. You can always mail us on support@ampmjobs.in</p>
+      </div>
+    </div><!-- End Breadcrumbs -->
+  
+
+  
+  
+  <!-- ======= Footer ======= -->
+        <footer id="footer"  th:include="footer :: included-footer"></footer>
+<!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script  th:src="@{/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+  <script  th:src="@{/assets/vendor/aos/aos.js}"></script>
+  <script  th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <script  th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+
+  <!-- Template Main JS File -->
+  <script  th:src="@{/assets/js/main.js}"></script>
+
+</body>
+
+</html>

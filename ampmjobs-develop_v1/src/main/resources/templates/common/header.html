@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<!-- ======= Header ======= -->
+<header th:fragment="included-content">
+    <div class="container d-flex align-items-center">
+        <h1 class="logo me-auto">
+            <a th:href="@{/}"><img th:src="@{/assets/img/ampmlogo.png}" class="img-logo" alt="AM PM Jobs Logo"></a>
+        </h1>
+
+        <nav id="navbar" class="navbar order-last order-lg-0">
+            <ul >
+                <li><a th:class="${activeClass == 'home' ? 'active':''}" th:href="@{/}">Home</a></li>
+                <li><a th:class="${activeClass == 'aboutUs' ? 'active':''}" th:href="@{/aboutUs}">About Us</a></li>
+                <li><a th:class="${activeClass == 'aboutStudents' ? 'active':''}" th:href="@{/aboutStudents}">Students</a></li>
+                <li><a th:class="${activeClass == 'aboutEmployers' ? 'active':''}" th:href="@{/aboutEmployers}">Employers</a></li>
+                <li><a th:class="${activeClass == 'contactUs' ? 'active':''}" th:href="@{/contactUs}">Contact Us</a></li>
+            </ul>
+
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+    <div class="navbar-login-buttons">
+      <a th:href="@{/login}" class="get-started-btn">Already Registered - Log In</a>
+      <a th:href="@{/login}" class="get-started-btn-small">Log In</a>
+    </div>
+  </div>
+  
+  <div class="loader-container" id="ampm-loader" style="display: none;">
+    <div class="loader"></div>
+  </div>
+    
+</header>
+<!-- End Header -->
+
+
+
+</html>

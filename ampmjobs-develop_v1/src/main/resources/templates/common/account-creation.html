@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+
+<head  th:include="header-head :: included-head"></head>
+
+<head>
+ <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css}" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+
+ <!-- ======= Header ======= -->
+    <header  id="header" class="fixed-top" th:include="common/header :: included-content"></header>
+<!-- End Header -->
+<main id="mainExpired" th:if="${isLinkValid == false}">
+<div class="form-body" >
+        <form class="login-form">
+
+            <div class="prepassword-message-box">
+                <i class="fa fa-envelope" style="font-size:48px;color:red"></i><h3>The link you are trying to access has expired.</h3>
+            </div>
+            <div class="footer-container">
+                <span class="footer-message">&copy ampmjobs all rights reserved</span>
+            </div>
+        </form>  
+    </div>
+    </main>
+
+  <main id="main" th:if="${isLinkValid == true}">
+    
+    <!---student Account Creation Form-->
+    <div class="form-body">
+        <form class="login-form" id="accCreationForm">
+
+            <h3>Account Creation</h3>
+            <p id="match" class="invalid"></p>
+            <input id="enter-password" type="password" maxlength="15" placeholder="Enter Password" required>
+
+            <input id="confirm-password" type="password" maxlength="15" placeholder="Confirm Password" required>
+
+            <input  id="login-button" type="submit" value ="submit">
+
+            <div class="password-rules">
+              <span>* Must contain at least eight characters.</span>
+              <span>* With one Special character, one uppercase, one lowercase and one number.</span>
+            </div>
+
+            <div class="progress-bar"><span>Registration page 3 of 5</span></div>
+
+        </form>
+
+
+    </div>
+    
+    <div id="loginManually" style="display: none;">
+     <form  th:action="@{/login}" method="post" th:object="${userAccount}" id="authManuForm">
+
+           
+            <input id="login-email" type="email" name ="username">
+
+            <input id="login-password" type="password" name ="password">
+
+            <button type="submit" >Submit</button>
+        </form> 
+    </div>
+    
+
+  </main><!-- End #main -->
+
+  
+   <!-- ======= Footer ======= -->
+   <footer id="footer"  th:include="footer :: included-footer"></footer>
+   
+   <!-- End Footer -->
+    <input type="hidden" id="dbFlag" th:value="${dbFlag}"> 
+     <input type="hidden" id="dbMobileNo" th:value="${dbMobileNo}"> 
+     <input type="hidden" id="dbEmail" th:value="${dbEmail}"> 
+     <input type="hidden" id="encodedCode" th:value="${encodedCode}"> 
+     
+     
+    <div id="myLogInUrl1" th:attr="log-in-url-1=@{/login?error=pcs&flag={dbFlag}(dbFlag=${dbFlag})}"></div>
+    <div id="myLogInUrl2" th:attr="log-in-url-2=@{/login?error=pacs&flag={dbFlag}(dbFlag=${dbFlag})}"></div>
+    <div id="checkPasswordUrl" th:attr="check-pass-url=@{/home/checkPassword}"></div>
+   
+   
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script  th:src="@{/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+  <script  th:src="@{/assets/vendor/aos/aos.js}"></script>
+  <script  th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <script  th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+
+  <!-- Template Main JS File -->
+  <script  th:src="@{/assets/js/main.js}"></script>
+  <script  th:src="@{/assets/js/accountCreation.js}"></script>
+</body>
+
+</html>

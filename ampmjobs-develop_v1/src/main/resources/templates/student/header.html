@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<!-- ======= Header ======= -->
+
+<header th:fragment="included-content">
+    <div class="container d-flex align-items-center">
+        <h1 class="logo me-auto">
+            <a th:href="@{/}"><img th:src="@{/assets/img/ampmlogo.png}" class="img-logo" alt="AM PM Jobs Logo"></a>
+        </h1>
+
+        <nav id="navbar" class="navbar order-last order-lg-0">
+
+            <ul sec:authorize="hasRole('ROLE_STUDENT')">
+                <li><a th:class="${activeClass == 'home' ? 'active':''}" th:href="@{/}">Home</a></li>
+                <li><a th:class="${activeClass == 'dashboard' ? 'active':''}" th:href="@{/student/act/dashboard}">Dashboard</a></li>
+                <li><a th:class="${activeClass == 'jobSearch' ? 'active':''}" th:href="@{/student/act/searchJob}">Search Jobs</a></li>
+                <li><a th:class="${activeClass == 'myJobs' ? 'active':''}" th:href="@{/student/act/myJobs}">My Jobs</a></li>
+                <li><a th:class="${activeClass == 'editProfile' ? 'active':''}" th:href="@{/student/act/editProfile}">Edit Profile</a></li>
+                <li>
+					
+                <div class="profile-dropdown">
+                    <div onclick="toggle()" class="profile-dropdown-btn">
+                      <div class="profile-img">
+                        <img th:src="@{/assets/img/account.png}" class="profile-img" alt="account">
+                      </div>
+            
+                      <span class="user-text-size">User
+                        <i class="fa-solid fa-angle-down"></i>
+                      </span>
+                    </div>
+            
+                    <ul class="profile-dropdown-list profile-image-style " id="userProfilePlace"> 
+                     <li class="profile-dropdown-list-item p-0">
+                        <div class="add-style-1 p-0">
+                        <a href="Student Edit Profile.html" style="padding: 0px;"><div class="add-style-2 p-0">
+							<img th:if="${#authentication.principal.photoPath == null}" th:src="@{/assets/img/image-gallery.jpg}" class="image-circle-5"/>
+                       		<img th:if="${#authentication.principal.photoPath !=null}" th:src="@{'/user/viewDp/' + ${#authentication.principal.photoPath}}" class="image-circle-5" >
+
+                        </div></a>
+                     </div>
+                      </li>
+                      <li class="profile-dropdown-list-item mt-2">
+                        <p class="form-field-5 m-0 p-0">
+                          <b sec:authentication="principal.name"></b>
+                        </p>
+                      </li>
+            
+                      <li class="profile-dropdown-list-item">
+                        <p class="form-field-5 m-0 p-0">
+                           <b sec:authentication="principal.username"></b>
+                        </p>
+                      </li>
+            
+                      <li class="profile-dropdown-list-item ">
+                        <p class="form-field-5 m-0 p-0">
+                          <b>Validity: <span th:text="${#authentication.principal.paymentExpireDate}"></span> </b> 
+                        </p>
+                      </li>
+                      <li class="profile-dropdown-list-item-1">
+							<button class="button-logout-1" type="button" onclick="doLogOut();"><span class="logout-text"><img th:src="@{/assets/img/logout-symbol.jpg}" class="add-img-color" style="width: 50px;"/></span>LOGOUT</button> 
+            			
+            			</li>
+            
+                      <hr />
+                    </ul>
+                  </div>
+             	</li>
+                
+            </ul>
+
+
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+
+    </div>
+    
+     <div class="loader-container" id="ampm-loader" style="display: none;">
+    <div class="loader"></div>
+  </div>
+    
+     <form id="logoutForm" style="display: none;" th:action="@{/logout}" method="POST"> </form>
+     
+      
+    
+    <script th:inline="javascript">
+    function doLogOut() {
+        debugger;
+        var confirmLogOut = confirm("Are you sure you want to Logout ?");
+        if (confirmLogOut) {
+        	$('#logoutForm').submit();
+        }
+    }
+</script>
+<script>
+    let profileDropdownList = document.querySelector(".profile-dropdown-list");
+let btn = document.querySelector(".profile-dropdown-btn");
+
+let classList = profileDropdownList.classList;
+
+const toggle = () => classList.toggle("active");
+
+window.addEventListener("click", function (e) {
+  if (!btn.contains(e.target)) classList.remove("active");
+});
+</script>
+  
+</header>
+<!-- End Header -->
+</html>

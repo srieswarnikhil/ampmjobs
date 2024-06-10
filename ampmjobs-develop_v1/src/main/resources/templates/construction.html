@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="included-head">
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title th:if="${headTitle}" th:text="${headTitle}">AMPMJOBS</title>
+<title th:unless="${headTitle}">AMPMJOBS</title>
+<meta content="" name="description">
+<meta content="" name="keywords">
+<!-- Favicons -->
+<link th:href="@{/assets/img/favicon.png}" rel="icon">
+<!-- Google Fonts -->
+<link
+  th:href="@{https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i}"
+  rel="stylesheet">
+<!-- Vendor CSS Files -->
+<link th:href="@{/assets/vendor/animate.css/animate.min.css}" rel="stylesheet">
+<link th:href="@{/assets/vendor/aos/aos.css}" rel="stylesheet">
+<!--   <link th:href="@{/assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+ -->
+<link th:href="@{/assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
+<link th:href="@{/assets/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet">
+<link th:href="@{/assets/vendor/remixicon/remixicon.css}" rel="stylesheet">
+<link th:href="@{/assets/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet">
+<!-- DATA-TABLES IMPORTANT CDN LINKS -->
+<script th:src="@{https://code.jquery.com/jquery-3.7.0.js}"></script>
+<script th:src="@{https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js}"></script>
+
+<link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css}">
+<link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css}">
+
+
+<link rel="stylesheet" th:href="@{https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css}">
+<script th:src="@{https://code.jquery.com/ui/1.12.1/jquery-ui.js}"></script>
+
+<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css}">
+<script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js}"></script>
+
+<!-- Template Main CSS File -->
+<link th:href="@{/assets/css/style.css}" rel="stylesheet">
+<link th:href="@{/assets/css/loader-style.css}" rel="stylesheet">
+
+<!-- Application Required Styles -->
+<link rel="stylesheet" th:href="@{/assets/css/employer-student-application-styles.css}">
+
+
+<meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+</head>
+
+<body>
+  <!-- ======= Header ======= -->
+<header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center">
+      <h1 class="logo me-auto"><a href="javascript:void(0);"><img src="assets/img/ampmlogo.png" class="img-logo" alt="Your Logo"></a></h1>
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a href="javascript:void(0);">Home</a></li>
+          <li><a href="javascript:void(0);">About Us</a></li>
+          <li><a href="javascript:void(0);">Students</a></li>
+          <li><a href="javascript:void(0);">Employers</a></li>
+          <li><a href="javascript:void(0);">Contact Us</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+      <div class="navbar-login-buttons">
+        <!-- <span">Already registered user</span> -->
+        <a href="javascript:void(0);" class="get-started-btn">Already Registered - Log In</a>
+      </div>
+    </div>
+  </header>
+  <!-- End Header -->
+
+  <main id="main">
+    
+    <div align="center">
+    <br><br><br><br><br>
+    <h1 style="color: blue; font: bold"> COMING SOON................</h1>
+    <br><br><br>
+    </div>
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" th:include="footer :: included-footer"></footer>
+    <!-- End Footer -->
+
+
+
+  </main>
+
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script th:src="@{/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+  <script th:src="@{/assets/vendor/aos/aos.js}"></script>
+  <script th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+  <!-- Template Main JS File -->
+  <script th:src="@{/assets/js/main.js}"></script>
+  <!-- Student Dashboard Important Scripts Below -->
+ </body>
+
+</html>
