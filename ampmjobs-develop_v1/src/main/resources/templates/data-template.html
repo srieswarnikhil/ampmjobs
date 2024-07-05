@@ -1,0 +1,19 @@
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<select  th:if="${flag eq 'city'}">
+    <option value="" selected disabled hidden>City</option>
+    <option th:each="myData : ${luData}" th:value="${myData.city_id}" th:text="${myData.city_name}"></option>
+</select>
+
+<select th:if="${flag eq 'location'}">
+    <option value="" selected disabled hidden>Preferred  Place</option>
+    <option th:each="myData : ${luData}" th:value="${myData.location_id}" th:text="${myData.location_name}"></option>
+</select>
+
+</body>
+</html>

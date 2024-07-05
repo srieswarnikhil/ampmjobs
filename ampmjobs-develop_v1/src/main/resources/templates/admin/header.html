@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<!-- ======= Header ======= -->
+
+<header th:fragment="included-content">
+  <div class="container d-flex align-items-center">
+    <h1 class="logo me-auto">
+      <a th:href="@{/}"><img th:src="@{/assets/img/ampmlogo.png}" class="img-logo" alt="AM PM Jobs Logo"></a>
+    </h1>
+
+    <nav id="navbar" class="navbar order-last order-lg-0">
+
+      <ul sec:authorize="hasRole('ROLE_ADMIN')">
+        <li></li>
+        <li><a th:class="${activeClass == 'discounts' ? 'active':''}" th:href="@{/admin/checkDiscount}">Discounts</a></li>
+        <li></li>
+        <li><a th:class="${activeClass == 'recruiters' ? 'active':''}" th:href="@{/admin/checkRecruiter}">Recruiters</a></li>
+        <li></li>
+<!--         <li><a th:class="${activeClass == 'pwdChange' ? 'active':''}" th:href="@{/admin/updatePassword}">Change Password</a></li>
+ -->
+        <li></li>
+        <li><button class="button-logout-1" type="button" onclick="doLogOut();">
+            <span class="logout-text"><img th:src="@{/assets/img/logout-symbol.jpg}" class="add-img-color" style="width: 50px;" /></span>LOGOUT
+          </button></li>
+
+      </ul>
+
+
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav>
+
+  </div>
+
+
+  <div class="loader-container" id="ampm-loader" style="display: none;">
+    <div class="loader"></div>
+  </div>
+
+  <form id="logoutForm" style="display: none;" th:action="@{/logout}" method="POST"></form>
+
+
+
+  <script th:inline="javascript">
+			function doLogOut() {
+				debugger;
+				var confirmLogOut = confirm("Are you sure you want to Logout ?");
+				if (confirmLogOut) {
+					$('#logoutForm').submit();
+				}
+			}
+		</script>
+
+
+</header>
+<!-- End Header -->
+</html>

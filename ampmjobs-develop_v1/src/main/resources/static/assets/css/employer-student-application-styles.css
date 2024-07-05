@@ -1,0 +1,1631 @@
+
+/*------------------------------start-profile-sec----------------------------*/
+
+nav li ul li{
+  list-style: none;
+}
+.image-circle-5{
+  width: 60px;
+  height: 60px;  
+  background-size: cover;
+  border-radius: 50%;
+}
+.form-field-5{
+  text-align: center;
+  font-size: 10px;
+  font-weight: bold;
+}
+.profile-image-style{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.profile-dropdown {
+  position: relative;
+  width: fit-content;
+}
+
+.profile-dropdown-btn {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  padding-right: 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  width: 150px;
+  border-radius: 50px;
+  color: var(--black);
+  /* background-color: white;
+  box-shadow: var(--shadow); */
+
+  cursor: pointer;
+  border: 1px solid var(--secondary);
+  transition: box-shadow 0.2s ease-in, background-color 0.2s ease-in,
+    border 0.3s;
+}
+
+.profile-dropdown-btn:hover {
+  background-color: var(--secondary-light-2);
+  box-shadow: var(--shadow);
+}
+
+.profile-img {
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: url(./assets/profile-pic.jpg);
+  background-size: cover;
+  margin-left: 10px;
+}
+
+.profile-img i {
+  position: absolute;
+  right: 0;
+  bottom: 0.3rem;
+  font-size: 0.5rem;
+  color: var(--green);
+}
+
+.profile-dropdown-btn span {
+  margin: 0 0.5rem;
+  margin-right: 0;
+}
+
+.profile-dropdown-list {
+  position: absolute;
+  top: 68px;
+  width: fit-content;
+  right: 0;
+  background-color: var(--white);
+  /* background-color: #f5f5f5; */
+  border-radius: 10px;
+  border: 0px solid #f5f5f5;
+  max-height: 0;
+  overflow: hidden;
+  /* box-shadow: var(--shadow); */
+  transition: max-height 0.5s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-dropdown-list hr {
+  border: 0.5px solid var(--green);
+}
+
+.profile-dropdown-list.active {
+  max-height: 400px;
+}
+
+.profile-dropdown-list-item {
+  /*padding: 0.5rem 0rem 0.5rem 1rem;*/
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  transition: background-color 0.2s ease-in, padding-left 0.2s;
+}
+.profile-dropdown-list-item-1 {
+  /*padding: 0.5rem 0rem 0.5rem 1rem;*/
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  transition: background-color 0.2s ease-in, padding-left 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-dropdown-list-item a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--black);
+}
+
+.profile-dropdown-list-item a i {
+  margin-right: 0.8rem;
+  font-size: 1.1rem;
+  width: 2.3rem;
+  height: 2.3rem;
+  background-color: var(--secondary);
+  color: var(--white);
+  line-height: 2.3rem;
+  text-align: center;
+  margin-right: 1rem;
+  border-radius: 50%;
+  transition: margin-right 0.3s;
+}
+.image-box{
+    width: 100%;
+}
+.metal{
+    display:block;
+}
+.add-color{
+    background-color: #fff;
+}
+.add-style-logout{
+	font-weight: 500;
+    border: 0px solid #ffff;
+}
+.add-style-1{
+    display: flex;
+    justify-content: center!important;
+    align-items: end!important;
+}
+.add-style-2{
+    display: flex;
+    justify-content: center;
+}
+.user-text-size{
+	font-size: 20px;
+	font-weight: 500;
+	font-family: "Poppins", sans-serif;
+}
+.logout-style{
+	background-color: #ffff;
+	border: 2px solid black;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+button{
+	background-color: #ffff;
+}
+@media screen and (max-width: 992px){
+	.profile-dropdown-list {
+    position: absolute;
+    top: 68px;
+    width: fit-content;
+    right: 0;
+    /* background-color: var(--white); */
+    background-color:rgb(245, 245, 220);
+    /* background-color: #f5f5f5; */
+    border-radius: 10px;
+    border: 1px solid #f5f5f5;
+    max-height: 0;
+    overflow: hidden;
+    /* box-shadow: var(--shadow); */
+    transition: max-height 0.5s;
+  }
+  
+  
+  .profile-dropdown-list.active {
+     min-height: 300px;
+  }
+  .user-text-size{
+	  font-size: 16px;
+}
+}
+.button-logout-1{
+   background-color: #fff;
+   border-color:#fff;
+   border: 2px dashed #000;
+   color: #000;
+   margin: 6px;
+   padding: 5px;
+   font-size: 16px;
+   font-weight: bold;
+   border-radius: 10px;
+}
+
+
+/*------------------------------end-profile-sec----------------------------*/
+
+
+
+/*
+Student-Dashboard.html and Employer-Dashboard.html Styles Below:
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+
+.root {
+    background-color: #F5F5F5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    max-height: -moz-fit-content;
+    max-height: fit-content;
+}
+
+.body-main {
+    /* border: 1px solid red; */
+    height: auto;
+}
+
+.browse-jobs {
+    /* border: 1px solid blue; */
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+.browse-jobs-top-bar {
+    border-top: 1px solid gray;
+    border-right: 1px solid gray;
+    border-left: 1px solid gray;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-image: linear-gradient(#FEFEFE, #F2F2F2);
+}
+
+.browse-jobs-top-bar span {
+    color: gray;
+    font-size: 14px;
+}
+
+.browse-jobs-top-bar button {
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 2px 5px;
+    background-color: orange;
+    font-weight: bold;
+    color: white;
+}
+
+.jobs-list {
+    background-color: white;
+    padding: 30px 5px;
+    border: 1px solid gray;
+}
+
+.jobs-list ul {
+    /* border: 1px solid aqua; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.jobs-list ul li {
+    list-style: none;
+}
+
+.jobs-list ul li a {
+    text-decoration: none;
+    color: #1DA1E0;
+}
+
+.jobs-list ul li a:hover {
+    color: #0000ff;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.table-container {
+    border: 1px solid red;
+    margin: 20px;
+}
+
+/* Define colors */
+:root {
+    --light-gray: #f4f4f4;
+    --white: #FEFEFE;
+    --lighter-gray: #F2F2F2;
+    --orange: orange;
+}
+
+/* Table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+tr {
+    border: 1px solid rgba(128, 128, 128, 0.5);
+    border-radius: 10px;
+}
+
+td {
+    border-right: 1px double gray;
+}
+
+.table-row:nth-child(even) {
+    background-color: var(--light-gray);
+}
+
+.table-row:nth-child(odd) {
+    background-color: var(--white);
+}
+
+.table-fields {
+    padding: 10px;
+}
+
+.p-2 {
+    width: 33.33%;
+}
+.td-c-4 {
+    width: 25%;
+}
+.td-c-5{
+	width: 20%;
+}
+.td-c-7 {
+    width: 14.28%;
+}
+.scroll{
+	overflow-x: scroll;
+}
+
+/* Button styles */
+/*.view-button,
+.apply-button {
+    padding: 1%;
+    border: 1px solid rgba(128, 128, 128, 0.33);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 8px;
+}*/
+.apply-button {
+	padding: 5px;
+    border: 1px solid rgba(128, 128, 128, 0.33);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    max-width: fit-content;
+    min-width: 52px;
+    margin-right: 8px;
+    margin-left: 3px;
+
+}
+
+.view-button:hover,
+.apply-button:hover {
+    /* background-image: linear-gradient(#007ECC,#004CCC); */
+    background-color: gray;
+}
+
+/* Additional styles */
+.table-container {
+    margin-top: 20px;
+    border: 1px solid var(--lighter-gray);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+/* Optional: Add box-shadow for a more modern look */
+.table-container {
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Modal Styles */
+/* Modal Styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* semi-transparent background */
+    z-index: 9999;
+    display: none;
+}
+@media screen and (min-width:991px){
+	.modal-content-1 {
+	bottom: 20%;
+    background-color: #f4f4f4; /* light gray background */
+    margin: 20% auto;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 600px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+}
+@media screen and (max-width:576px){
+	.modal-content-1 {
+	top: 0%;
+	bottom: 0%;
+    background-color: #f4f4f4; /* light gray background */
+    margin: 20% auto;
+    padding: 20px;
+    border-radius: 5px;
+    width: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    
+}
+}
+@media screen and (min-width:576px)and (max-width:991px){
+	.modal-content-1 {
+	top: 0%;
+	bottom: 0%;
+    background-color: #f4f4f4; /* light gray background */
+    margin: 20% auto;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 600px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+}
+
+
+
+.modal-content {
+    background-color: #f4f4f4; /* light gray background */
+    margin: 20% auto;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 600px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #666;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.flex-row {
+    flex-direction: row;
+    justify-content: space-around;
+}
+.job-details{
+    width: 40%;
+}
+.job-description{
+    width: 40%;
+}
+
+#myTextarea{
+    width: 100%;
+}
+/* Style for buttons */
+.view-button-2 {
+    background-color: #666;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+    text-align: center;
+}
+.shortlist-button{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.view-button-2:hover {
+    background-color: green;
+}
+
+/* Modal Styles */
+
+.body-main-components {
+    /* border: 3px solid purple; */
+    display: flex;
+    /* margin: 0 20px; */
+}
+
+.statistics {
+    /* border: 1px solid green; */
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px 20px 20px;
+    width: 50%;
+}
+
+.statistics-top-bar {
+    border-top: 1px solid gray;
+    border-right: 1px solid gray;
+    border-left: 1px solid gray;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-image: linear-gradient(#FEFEFE, #F2F2F2);
+}
+
+.statistics-top-bar span {
+    color: gray;
+    font-size: 14px;
+}
+
+.statistics-top-bar button {
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 2px 5px;
+    background-color: rgb(0, 195, 255);
+    font-weight: bold;
+    color: white;
+}
+
+.statistics-body {
+    border: 1px solid gray;
+    padding: 20px 10px;
+    background-color: white;
+}
+
+#progressbar1 {
+    background-image: linear-gradient(#FEFEFE, #F2F2F2);
+    width: 50%;
+    border: 1px solid gray;
+    border-radius: 4px;
+    /* (height of inner div) / 2 + padding */
+    padding: 0px;
+}
+
+#progressbar1>div {
+    background-color: #0888C7;
+    width: 40%;
+    /* Adjust with JavaScript */
+    height: 20px;
+    border-radius: 2px;
+}
+
+#progressbar2 {
+    background-image: linear-gradient(#FEFEFE, #F2F2F2);
+    width: 50%;
+    border: 1px solid gray;
+    border-radius: 4px;
+    /* (height of inner div) / 2 + padding */
+    padding: 0px;
+}
+
+#progressbar2>div {
+    background-color: #5BB35C;
+    width: 20%;
+    /* Adjust with JavaScript */
+    height: 20px;
+    border-radius: 2px;
+}
+
+#progressbar3 {
+    background-image: linear-gradient(#FEFEFE, #F2F2F2);
+    width: 50%;
+    border: 1px solid gray;
+    border-radius: 4px;
+    /* (height of inner div) / 2 + padding */
+    padding: 0px;
+}
+
+#progressbar3>div {
+    background-color: #F9A836;
+    width: 60%;
+    /* Adjust with JavaScript */
+    height: 20px;
+    border-radius: 2px;
+}
+
+
+.calender {
+    /* border: 1px solid green; */
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px 20px 20px;
+    width: 50%;
+}
+
+.calender-top-bar {
+    border-top: 1px solid gray;
+    border-right: 1px solid gray;
+    border-left: 1px solid gray;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-image: linear-gradient(#FEFEFE, #F2F2F2);
+}
+
+.calender-top-bar span {
+    color: gray;
+    font-size: 14px;
+}
+
+.calender-top-bar button {
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 2px 5px;
+    background-color: rgb(0, 195, 255);
+    font-weight: bold;
+    color: white;
+}
+
+.calender-body {
+    border: 1px solid gray;
+    padding: 20px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.calender-date {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.day-checkboxes {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+input[type="checkbox"]:checked+label {
+    font-weight: bold;
+    color: #FF5722;
+    /* Custom color for selected days */
+}
+
+.week-day-date {
+    font-style: italic;
+    margin-left: 5px;
+    text-decoration: wavy;
+}
+
+#unavailable-dates {
+    border: 1px solid gray;
+    border-radius: 4px;
+    padding: 2%;
+    background-color: #F9D267;
+    color: #666666;
+}
+
+#unavailable-dates:hover {
+    cursor: pointer;
+    background-color: #d4af4a;
+}
+
+.selected {
+    background-color: #ffcccc;
+}
+
+@media screen and (width >=100px) and (width <=910px) {
+    .jobs-list {
+        background-color: white;
+        /* padding: 30px 5px; */
+        /* border: 1px solid gray; */
+        /* border: 1px solid red; */
+        padding: 0;
+    }
+
+    .jobs-list ul {
+        /* border: 1px solid aqua; */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        margin: 0;
+    }
+
+    .jobs-list ul li {
+        margin: 8px 0 8px 0;
+    }
+
+    .body-main-components {
+        /* border: 3px solid red; */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .statistics {
+        /* border: 1px solid green; */
+        display: flex;
+        flex-direction: column;
+        /* margin: 0 20px 20px 20px; */
+        width: 100%;
+    }
+
+    .calender {
+        /* border: 1px solid green; */
+        display: flex;
+        flex-direction: column;
+        /* margin: 0 20px 20px 20px; */
+        width: 100%;
+    }
+}
+
+@media screen and (width >=100px) and (width <=620px) {
+    .calender-body {
+        border: 1px solid gray;
+        padding: 20px;
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+/*
+Student-My-Jobs.html and Student-Search-Jobs.html styles below:
+*/
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.bottom-bar{
+    margin: 20px 20px;
+    box-shadow: 2px 5px 7px 0px rgba(128, 128, 128, 0.75);
+}
+
+
+.bottom-header-bar{
+    border-top: 1px solid gray;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 20px;
+    background-image: linear-gradient(#FEFEFE,#F2F2F2);
+}
+
+.bar-right-item button{
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 0 5px;
+    background-color: orange;
+    color: black;
+    font-size: 14px;
+}
+
+.bottom-table{
+    border: 1px solid gray;
+    padding: 10px 20px;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td{
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+} 
+
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+table .table-striped td button{
+    border: 1px solid gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.action-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.action-box button{
+    border: 1px solid gray;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-image: linear-gradient(#0080CC, #014ACD);
+}
+.action-box button:hover{
+    border: 1px solid gray;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-image: linear-gradient(#014ACD,#0080CC);
+}
+
+/* CSS */
+/* The Modal (background) */
+.modal {
+    display: none;
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  /* The flex container for the image and the title */
+  .flex {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* The submit button */
+  .btn {
+    background-image: linear-gradient(#0080CC, #014ACD);
+    color: white;
+    padding: 10px 20px;
+    margin: 10px 0;
+    border: none;
+    cursor: pointer;
+    width: 33%;
+  }
+  
+  .btn:hover {
+    color: white;
+    background-image: linear-gradient(#014ACD,#0080CC);
+  }
+  
+
+@media screen and (max-width: 520px)
+{
+    #example{
+        font-size: 14px;
+    }
+}
+
+/*
+Student-Edit-Profile and Employer-Edit-Profile styles below:
+*/
+
+/* Default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+
+.root {
+    background-color: #F5F5F5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+.profile-top-bar {
+    border-top: 1px solid gray;
+    border-right: 1px solid gray;
+    border-left: 1px solid gray;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-image: linear-gradient(#FEFEFE, #F2F2F2);
+}
+
+.profile-top-bar span {
+    color: gray;
+    font-size: 14px;
+}
+
+.profile-form {
+    border: 1px solid gray;
+}
+
+.form-field-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.form-section {
+    flex: 50%;
+    padding: 5px;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0 0 20px;
+    width: 40%;
+}
+
+.form-field label {
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+form button {
+    margin: 0 0 10px 25px;
+    border: 1px solid gray;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-image: linear-gradient(#0080CC, #014ACD);
+}
+
+form button:hover {
+    background-image: linear-gradient(#014ACD, #0080CC);
+}
+
+.dropdown-check-list .anchor {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    padding: 7.5px;
+    margin: 2.5% 0;
+    border: 1px solid rgba(128, 128, 128, 0.33);
+    font-size: 14px;
+    width: 100%;
+    background-color: #fff;
+}
+
+.dropdown-check-list .anchor:hover {
+    border-bottom: 1px solid rgba(53, 82, 225, 0.75);
+    background-color: #fff;
+}
+
+.dropdown-check-list ul.items {
+    padding: 2px;
+    display: none;
+    margin: 0;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    border-top: none;
+}
+
+.dropdown-check-list ul.items li {
+    list-style: none;
+}
+
+.dropdown-check-list.visible .items {
+    display: block;
+}
+
+#skills {
+    height: 40px;
+    overflow-y: scroll;
+    padding: 4px;
+}
+
+/* Additional styles from Student-Edit-Profile.css */
+#gender {
+    height: 40px;
+}
+
+#blood_group {
+    height: 40px;
+}
+
+.button-container{
+    display: flex;
+    /* border: 1px solid red; */
+    justify-content: flex-end;
+    align-items: center;
+}
+.button-container-1{
+	text-align: start;
+	margin-top:50px;
+}
+.button-5{
+	width: 40%;
+}
+#edit-profile-submit{
+    margin-right: 10%;
+}
+
+/* Media Query for screens <= 768px */
+@media screen and (max-width: 768px) {
+    .profile {
+        margin: 10px;
+    }
+
+    .form-field-container{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-section {
+        flex: 100%;
+        display: flex;
+        flex-direction: column; /* Change to column layout */
+    }
+
+    .form-field {
+        width: 55%; /* Set width to 100% */
+        margin: 10px 0; /* Adjust margin for spacing */
+    }
+
+    .button-container{
+        display: flex;
+        /* border: 1px solid red; */
+        justify-content: flex-start;
+        align-items: center;
+    }
+    
+    #edit-profile-submit{
+        margin-right: 0%;
+    }
+}
+@media screen and (max-width: 480px) {
+    .profile {
+        margin: 10px;
+    }
+
+    .form-field-container{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-section {
+        flex: 100%;
+        display: flex;
+        flex-direction: column; /* Change to column layout */
+    }
+
+    .form-field {
+        width: 95%; /* Set width to 100% */
+        margin: 10px 0; /* Adjust margin for spacing */
+    }
+
+    .button-container{
+        display: flex;
+        /* border: 1px solid red; */
+        justify-content: flex-start;
+        align-items: center;
+    }
+    
+    #edit-profile-submit{
+        margin-right: 0%;
+    }
+}
+
+/*
+Employer Post Jobs, Employer Jobs Posted and Employer Job Applications Styles Below:
+*/
+
+/* Default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+
+.root {
+    background-color: #F5F5F5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+.profile-top-bar {
+    border-top: 1px solid gray;
+    border-right: 1px solid gray;
+    border-left: 1px solid gray;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-image: linear-gradient(#FEFEFE, #F2F2F2);
+}
+
+.profile-top-bar span {
+    color: gray;
+    font-size: 14px;
+}
+
+.profile-top-bar button {
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 2px 5px;
+    background-color: orange;
+    font-weight: bold;
+    color: white;
+}
+
+.profile-form {
+    border: 1px solid gray;
+}
+
+.form-section {
+    flex: 50%;
+    padding: 5px;
+}
+.full-details{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items:flex-start;
+}
+.left-side-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-right: 0px;
+}
+.right-side-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 0px;
+}
+.text-part{
+    overflow-y: scroll;
+    width: 24vw;
+}
+.button-part{
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+}
+.time-container{
+    display: flex;
+    flex-direction: row;
+    
+}
+.form-field {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0 0 20px;
+    width: 250px;
+}
+
+.form-field label {
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+form button {
+    margin: 0 0 10px 25px;
+    border: 1px solid gray;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-image: linear-gradient(#0080CC, #014ACD);
+}
+
+form button:hover {
+    background-image: linear-gradient(#014ACD, #0080CC);
+}
+
+.dropdown-check-list .anchor {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    padding: 7.5px;
+    margin: 2.5% 0;
+    border: 1px solid rgba(128, 128, 128, 0.33);
+    font-size: 14px;
+    width: 100%;
+    background-color: #fff;
+}
+
+.dropdown-check-list .anchor:hover {
+    border-bottom: 1px solid rgba(53, 82, 225, 0.75);
+    background-color: #fff;
+}
+
+.dropdown-check-list ul.items {
+    padding: 2px;
+    display: none;
+    margin: 0;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    border-top: none;
+}
+
+.dropdown-check-list ul.items li {
+    list-style: none;
+}
+
+.dropdown-check-list.visible .items {
+    display: block;
+}
+
+#skills {
+    height: 40px;
+    overflow-y: scroll;
+    padding: 4px;
+}
+
+/* Media Query for screens <= 768px */
+@media screen and (max-width: 992px) {
+    .profile {
+        margin: 10px;
+    }
+
+    .form-section {
+        flex: 100%;
+    }
+
+    .form-field {
+        width: 100%;
+    }
+    .full-details{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items:center;
+    }
+    .left-side-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-right: 0px;
+        width: 80%;
+    }
+    .right-side-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-left: 0px;
+        width: 80%;
+    }
+    .text-part{
+        overflow-y: scroll;
+    }
+    .button-part{
+        display: flex;
+        justify-content: center;
+        margin: 5px;
+    }
+    .form-field {
+        display: flex;
+        flex-direction: column;
+        margin: 10px 0 0 20px;
+        width: 90%;
+    }
+    .text-part{
+        width: 100%;
+        overflow-y: scroll;
+    }
+    
+}
+
+/*
+Employer Jobs Posted and Employer Job Applications Styles Below:
+*/
+
+
+.icon-button-1{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    color: #333333;
+    background-color: #f5f5f5;
+    border: none;
+    outline: none;
+    border-radius: 50%; 
+  }
+  .icon-button__badge{
+    position: absolute;
+    top: -5px;
+    right: 0px;
+    bottom: -10px;
+    width: 20px;
+    height: 20px;
+    background: red;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 14px;
+  }
+  .view-all-content{
+    background-color: #f5f5f5;
+    padding: 5px;
+    top: 40px;
+    cursor: pointer;
+  }
+  .view-all-content::after,.view-all-content:hover{
+    color: blue;
+  }
+  .stop{
+    display: none;
+  }
+
+  
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.bottom-bar{
+    margin: 20px 20px;
+    box-shadow: 2px 5px 7px 0px rgba(128, 128, 128, 0.75);
+}
+
+
+.bottom-header-bar{
+    border-top: 1px solid gray;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 20px;
+    background-image: linear-gradient(#FEFEFE,#F2F2F2);
+}
+
+.bar-right-item button{
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 0 5px;
+    background-color: orange;
+    color: black;
+    font-size: 14px;
+}
+
+.bottom-table{
+    border: 1px solid gray;
+    padding: 10px 20px;
+    width: 100%;
+    overflow-x: scroll;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td{
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+} 
+
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+table .table-striped td button{
+    border: 1px solid gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.action-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.action-box button{
+    border: 1px solid gray;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-image: linear-gradient(#0080CC, #014ACD);
+}
+.action-box button:hover{
+    border: 1px solid gray;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-image: linear-gradient(#014ACD,#0080CC);
+}
+
+/* CSS */
+/* The Modal (background) */
+.modal {
+    display: none;
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  /* The flex container for the image and the title */
+  .flex {
+    display: flex;
+    align-items: center;
+  }
+  .table-control{
+    max-height: 100px;
+    min-height: 30px;
+    text-align: center;
+  }
+  .description-control{
+    height: 100%;
+    text-overflow: ellipsis;
+  }
+  .view-button{
+    background-color: green;
+    color: #fff;
+    width: 52px;
+    padding: 5px;
+    border-radius: 6px;
+    border-color: green;
+    margin: 3px;
+  }
+
+  .delete-button{
+    background-color: #F0F0F0;
+    color: #000;
+    width: 52px;
+    padding: 5px;
+    border-radius: 6px;
+    border-color: #fff;
+    margin: 3px;    
+  }
+
+  /* The submit button */
+  .btn {
+    background-image: linear-gradient(#0080CC, #014ACD);
+    color: white;
+    padding: 10px 20px;
+    margin: 10px 0;
+    border: none;
+    cursor: pointer;
+    width: 33%;
+  }
+  
+  .btn:hover {
+    color: white;
+    background-image: linear-gradient(#014ACD,#0080CC);
+  }
+
+  /* Employer Job Posted Styles Below */
+  .update-button{
+    border: 1px solid gray;
+    border-radius: 4px;
+    background-color: #008000;
+    color: #fff;
+    padding: 3%;
+    margin-left: 5px;
+  }
+
+  .edit-button{
+    border: 1px solid gray;
+    border-radius: 4px;
+    background-color: #008000;
+    color: #fff;
+    padding: 5% 7%;
+    margin-left: 5px;
+    margin-bottom: 10px;
+  }
+
+  .update-button:hover{
+    border: 1px solid gray;
+    border-radius: 4px;
+    background-color: gray;
+    color: #fff;
+    padding: 3%;
+    margin-left: 5px;
+  }
+
+  .edit-button:hover{
+    border: 1px solid gray;
+    border-radius: 4px;
+    background-color: gray;
+    color: #fff;
+    padding: 5% 7%;
+    margin-left: 5px;
+  }
+  
+
+@media screen and (max-width: 520px)
+{
+    #example{
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="employer/header-head :: included-head"></head>
+
+<body>
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top" th:include="employer/header :: included-content"></header>
+  <!-- End Header -->
+  <main id="main">
+    <!-- ======= Breadcrumbs ======= -->
+	    <div class="breadcrumbs" data-aos="fade-in">
+	      <div class="container">
+	        <h2>Employer Edit Profile</h2>
+	        <div class="slick-carousel">
+	         <p>"Your most unhappy customers are your greatest source of learning." - Bill Gates</p>
+	         <p>"Part-time employees bring a fresh perspective and valuable skills to the table, contributing to the success of any team." </p>
+	         <p>"Hiring part-time workers can be a strategic move, offering businesses the ability to adapt quickly to changing needs." </p>
+	         <p>"Embrace the power of part-time talent; it's not about the hours worked, but the impact made." </p>
+	         <p>"Sometimes, greatness comes in part-time packages – hire for passion, dedication, and results." </p>
+	         <p>"Unlock the potential of part-time hires; they bring unique perspectives and a dynamic approach to the workplace." </p>
+	         <p>"Quality part-time employees don't watch the clock; they focus on what counts and deliver exceptional outcomes."</p>
+	         <p>"Smart companies recognize that part-time roles can be filled with full-time dedication and commitment."</p>
+	         <p>"Part-time positions create opportunities for individuals to pursue passions outside of work, leading to a more fulfilled and motivated team."</p>
+	         <p>"Quality over quantity: part-time employees can deliver exceptional results without the need for a full-time commitment."</p>
+	         <!-- Add more <p> elements with additional text -->
+	       </div>   
+	      </div>
+	    </div>
+	  <!-- End Breadcrumbs -->
+
+    <div class="employer-postjobs-container">
+      <div class="root">
+
+        <div class="profile">
+
+          <div class="profile-top-bar">
+            <span>Employer Edit Profile</span>
+          </div>
+
+          <div class="profile-form">
+
+            <form id="editErUserProfile" method="post" th:object="${userDetails}" th:action="@{/employer/updateErProfile}">
+
+
+              <div class="form-field-container">
+
+                <div class="form-section">
+                  <div class="form-field">
+                    <label for="name">Name</label> <input type="text" th:value="${userDetails.name}" disabled>
+                  </div>
+
+                  <div class="form-field">
+                    <label for="email">Email</label> <input type="email" disabled th:value="${userDetails.email}">
+                  </div>
+
+                  <div class="form-field">
+                    <label for="phone">Phone</label> <input type="tel" th:value="${userDetails.phone}" disabled>
+                  </div>
+
+                  <div class="form-field">
+                    <label for="account-type">Account Type</label> <select id="account-type" disabled>
+                      <option selected th:text="${userDetails.type}"></option>
+                    </select>
+                  </div>
+
+                  <div th:if="${userDetails.type == 'company'}">
+
+                    <div class="form-field">
+                      <label for="business-name">Company/Business name</label> <input type="text" th:value="${userDetails.company_name}" disabled>
+                    </div>
+
+                    <div class="form-field">
+                      <label for="business-domain">Business Domain</label> <input type="text" th:value="${userDetails.business_domain}" disabled>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-section">
+
+                  <div class="form-field">
+                    <label for="address1">Address Line 1</label> <input maxlength="60" type="text" th:value="${userDetails.address_line1}" required="required"
+                      id="address1">
+                  </div>
+
+                  <div class="form-field">
+                    <label for="address2">Address Line 2</label> <input maxlength="60" type="text" th:value="${userDetails.address_line2}" required id="address2">
+                  </div>
+
+                  <div class="form-field">
+                    <label for="state">State</label> <select class="form-design" id="state" name="state" required onchange="loadCities(this.value);">
+                      <option th:selected="${myData.state_id == userDetails.stateId}" th:value="${myData.state_id}" th:each="myData : ${stateList}"
+                        th:text="${myData.state_name}"></option>
+                    </select>
+                  </div>
+
+
+
+                  <div class="form-field">
+                    <label for="state">City</label> <select class="form-design" id="city" name="city" required>
+                      <option th:if="${myData.city_id == userDetails.city_id ? selected : ''}" th:value="${myData.city_id}"
+                        th:each="myData : ${cityList}" th:text="${myData.city_name}"></option>
+                    </select>
+                  </div>
+
+                  <div class="form-field">
+                    <label for="pin">Pincode</label> <input id="login-pin" th:value="${userDetails.pincode}" type="tel" required>
+                  </div>
+
+
+                  <!--<div class="form-field edit-profile-photo">
+                    <label>Upload Photo</label> <input type="file" id="userPic" />
+                  </div>-->
+
+                </div>
+              </div>
+
+
+
+              <div class="button-container">
+                <button id="edit-profile-submit" type="submit">Save</button>
+              </div>
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" th:include="footer-1 :: included-footer"></footer>
+    <!-- End Footer -->
+
+    <div id="loadTemplate" th:attr="template-url=@{/user/loadTemplate}"></div>
+
+  </main>
+
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script th:src="@{/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+  <script th:src="@{/assets/vendor/aos/aos.js}"></script>
+  <script th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+  
+  <!-- Breadcrumbs Carousel Necessary Scripts -->
+<!-- Add jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Add Slick Carousel JS -->
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<!-- Your custom script -->
+<script>
+  $(document).ready(function(){
+    $('.slick-carousel').slick({
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 2300 // Adjust the speed as per your requirement (in milliseconds)
+    });
+  });
+</script>
+ <!-- Breadcrumbs Carousel Necessary Scripts Above -->
+
+  <script>
+    // Get dropdown elements
+    var dropdownButton = document.getElementById("dropdownButton");
+    var dropdownContent = document.querySelector(".dropdown-content");
+ 
+    // Toggle display of dropdown content on button click
+    dropdownButton.addEventListener("click", function () {
+        if (dropdownContent.style.display === "block") {
+            dropdownContent.style.display = "none";
+        } else {
+            dropdownContent.style.display = "block";
+        }
+    });
+ </script>
+  <!-- Template Main JS File -->
+  <script th:src="@{/assets/js/main.js}"></script>
+  <script th:src="@{/assets/js/erEditProfile.js}"></script>
+
+<script>
+     document.addEventListener("DOMContentLoaded", function() {
+            var pincodeEl = document.getElementById("login-pin");
+
+            pincodeEl.addEventListener("blur", function() {
+                var inputValue = pincodeEl.value;
+                // Remove non-numeric characters
+                inputValue = inputValue.replace(/\D/g, '');
+
+                if (inputValue.startsWith('0')) {
+                    // Remove the leading zero
+                    inputValue = inputValue.slice(1);
+                }
+                if(inputValue.length < 6 || inputValue.length > 6 ){
+                    pincodeEl.value = "";
+                    alert("please enter correct pincode");
+                }
+                else{
+                    // Update the input field value
+                    pincodeEl.value = inputValue;
+                }
+                
+            });
+          });
+  </script>
+  
+</body>
+
+</html>

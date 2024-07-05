@@ -1,0 +1,33 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+    <div id="cdInfoDivId">
+    <h5 style="text-align: center;"><strong>Customer Details</strong></h5>
+        <div th:if="${cd.email !=null}">
+        <h3>  <span>Email : <span th:text="${cd.email}"> </span></span></h3>
+        <h3><span> Phone : <span th:text="${cd.mobile}"> </span></span></h3>
+        <h3><span> Role : <span th:text="${cd.role}"> </span></span></h3>
+        <h3><span> Discount : <span> <input id="num-discount" class="form-design" th:value="${currentDiscount}" type="text" required="required">  </span></span></h3>
+      <h3> <span th:each="payData : ${paymentMasterData}">
+        <input type="radio" th:name="selectedPayId" th:value="${payData.paymentLookupId}"> <span
+          th:text="${payData.paymentType+' - '+payData.paymentAmount}"></span> </span>
+      </h3>
+      </div>
+        <div th:if="${cd.email ==null}" style="text-align: center;">
+        <span style="color: red; text-align: center;"> No data found.</span>
+        </div>
+      <h3>  <button th:if="${cd.email !=null}" class="form-design btn-ad" type="button" onclick="updateDiscount();">Update</button>
+          </h3>
+
+    </div>
+<input type="hidden" id="cUserRole" th:value="${cd.role}">
+<input type="hidden" id="cUserId" th:value="${cd.userId}">
+
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+
+<head  th:include="header-head :: included-head"></head>
+
+
+<body>
+  <!-- ======= Header ======= -->
+    <header  id="header" class="fixed-top" th:include="common/header :: included-content"></header>
+
+  <!-- End Header -->
+  <main id="main">
+
+    <div class="form-body">
+       <form class="login-form" th:action="@{/login}" method="post" th:object="${userAccount}" id="authForm">
+
+            <h3>Login Form</h3>
+            <p th:if="${error == 'logout'}" style="color: red; text-align: center;" th:text="#{logout.success.info}"> <br></p>
+            <p th:if="${error == 'true'}" style="color: red; text-align: center;" th:text="#{wrong.credentials.warn}"> <br> </p>
+            <p th:if="${error == '1'}" style="color: red; text-align: center;" > <br> Mobile Number not verified.</p>
+            <p th:if="${error == '2'}" style="color: red; text-align: center;" > <br> Email Id not verified.</p>
+            <p th:if="${error == '3'}" style="color: red; text-align: center;" > <br> Please do the Payment first.</p>
+            <p th:if="${error == '4'}" style="color: red; text-align: center;" > <br> Plan expired.</p>
+
+            <p th:if="${error == 'pcs'}" style="color: green; text-align: center;" > <br> Account Created Successfully. Please login!!!</p>
+            <p th:if="${error == 'prs'}" style="color: green; text-align: center;" > <br> Password updated Successfully. Please login!!!</p>
+            <p th:if="${error == 'pars'}" style="color: green; text-align: center;" > <br> Password Reset Successful! Please login!!!</p>
+            <p th:if="${error == 'pacs'}" style="color: green; text-align: center;" > <br> Account already created. Please login!!!</p>
+           <p th:if="${error == 'sot'}" style="color: green; text-align: center;" th:text="#{session.expired.info}"> <br> </p>
+
+           <p th:if="${error == 'du'}" style="color: green; text-align: center;" > <br> Only One Session Active at a time. Please login again!!!</p>
+           
+            <input id="login-email" type="email" name ="username" placeholder="Email" required>
+
+            <input id="login-password" type="password" name ="password" placeholder="Password" required>
+
+            <div class="login-form-options">
+                <div class="login-form-checkbox">
+                </div>
+                <a href="javascript:void(0);" onclick="forgotPassword();">Forgot Password?</a>
+            </div>
+
+            <button  id="login-button" type="submit" >Submit</button>
+            </br>          
+        </form>  
+             
+    </div>
+
+  </main> 
+ 
+  
+   <!-- ======= Footer ======= -->
+        <footer id="footer"  th:include="footer :: included-footer"></footer>
+<!-- End Footer -->
+
+<div id="regUrl" th:attr="reg-user-url=@{/home/registration/{flag}(flag=${flag})}"></div>
+ <div id="resetPassUrl" th:attr="reset-pass-url=@{/public/resetPassword/{flag}(flag=${flag})}"></div>
+
+  
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script  th:src="@{/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+  <script  th:src="@{/assets/vendor/aos/aos.js}"></script>
+  <script  th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <script  th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+  
+  <!-- Template Main JS File -->
+  <script  th:src="@{/assets/js/main.js}"></script>
+   <script  th:src="@{/assets/js/login.js}"></script>
+</body>
+
+</html>

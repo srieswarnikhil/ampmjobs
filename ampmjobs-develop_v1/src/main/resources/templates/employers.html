@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+
+<head  th:include="header-head :: included-head"></head>
+
+
+<body>
+
+    <!-- ======= Header ======= -->
+       <header  id="header" class="fixed-top" th:include="common/header :: included-content"></header>
+
+    <!-- End Header -->
+    <main id="main">
+ <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs" data-aos="fade-in">
+      <div class="container">
+        <h2>Employers</h2>
+        <p>Employers can register and post their Part-Time jobs, and also completing the mandatory registration process.</p>
+      </div>
+    </div><!-- End Breadcrumbs -->
+
+    <!-- ======= Why Us Section ======= -->
+    <section id="why-us" class="why-us">
+     <div class="container" data-aos="fade-up">
+  
+       <div class="row">
+         
+         <div class="col-lg-12 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+           <div class="icon-boxes d-flex flex-column justify-content-center">
+             <div class="row">
+               <div class="col-xl-3 d-flex align-items-stretch">
+                 <div class="icon-box mt-4 mt-xl-0">
+                   <i class="ri-pencil-fill"></i>
+                   <h4>Register</h4>
+                   <p>Employers can register and post their Part-Time jobs, and also completing the mandatory registration process</p>
+                 </div>
+               </div>
+               <div class="col-xl-3 d-flex align-items-stretch">
+                 <div class="icon-box mt-4 mt-xl-0">
+                   <i class="ri-profile-line"></i>
+                   <h4>Post Jobs</h4>
+                   <p>The Employers have the provision to post multiple Part-Time jobs in the space provided to them for a stipulated period of time depending on the plan of chosen</p>
+                 </div>
+               </div>
+               <div class="col-xl-3 d-flex align-items-stretch">
+                 <div class="icon-box mt-4 mt-xl-0">
+                   <i class="ri-chat-check-fill"></i>
+                   <h4>Select  </h4>
+                   <p>The Employers can select the desired Student from a pool of Students for their Part-Time job requirement</p>
+                 </div>
+               </div>
+               <div class="col-xl-3 d-flex align-items-stretch">
+                 <div class="icon-box mt-4 mt-xl-0">
+                   <i class="ri-team-fill"></i>
+                   <h4>Hire Them</h4>
+                   <p>The Employers can hire the required number of Students and pay them Hourly, Shiftily/Daily/Weekly based on the nature of job</p>
+                 </div>
+               </div>
+               
+             </div>
+           </div><!-- End .content-->
+         </div>
+       </div>
+  
+     </div>
+   </section><!-- End Why Us Section -->
+
+  <!-- ======= About Section ======= -->
+  <section class="about"> 
+    <div class="container" data-aos="fade-up">
+      <div class="row">
+        <div class="col-lg-12 pt-4 pt-lg-0 order-2 order-lg-1 content">
+            <ul>
+              <li><i class="bi bi-check-circle"></i> Post multiple Jobs in a stipulated time frame - Employers can Post multiple jobs in the space provided for a specific time period, as ampmjobs.in gives in the flexibility of posting a requirement in various time lines.</li>
+              <li><i class="bi bi-check-circle"></i> Full control over posting - Employers are no longer at the mercy of out-dated binders and bulletin boards or any other medium of advertisements for their job postings. They can update and remove their postings, anytime with just the click of a button.</li>
+              <li><i class="bi bi-check-circle"></i> Searchable Student job profiles - Why wait for the Students to contact you? Many Students create their own job profiles so that Employers can contact them directly, which speeds up the hiring process</li>
+              <li><i class="bi bi-check-circle"></i> E-Notifications of new Student profiles - When a Student creates a new job profile in the Application which goes in line with your posting, immediately you will receive an automatic email from our system notifying you on the new profile</li>
+              <li><i class="bi bi-check-circle"></i> Secure online experience - All information is kept confidential, which makes you feel secure about your personal information being available for the world to across.</li>
+            </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End About Section -->
+
+
+
+
+
+	 </main>
+
+  
+  
+ <!-- ======= Footer ======= -->
+         <footer id="footer"  th:include="footer :: included-footer"></footer>
+<!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script  th:src="@{/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+  <script  th:src="@{/assets/vendor/aos/aos.js}"></script>
+  <script  th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <script  th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+
+  <!-- Template Main JS File -->
+  <script  th:src="@{/assets/js/main.js}"></script>
+
+</body>
+
+</html>

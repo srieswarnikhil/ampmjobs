@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+  <div class="table-container" id="myResult">
+    <!-- Dynamically inserted table will appear here -->
+    <div class="middle-part">
+      <div class="middle-part-1 scroll" >
+        <table style="width: 100%">
+          <tr class="table-row">
+          <td class="td-c-5 table-fields table-fields-1">S. No</td>
+           <td class="td-c-5 table-fields table-fields-1">Student Name</td>
+            <td class="td-c-5 table-fields table-fields-1">Job Name</td>
+            <td class="td-c-5  table-fields table-fields-1">Gender</td>
+            <td class="td-c-5 table-fields table-fields-1">Action</td>
+          </tr>
+          <tr class="table-row" th:each="student,stuItt : ${students}">
+            <td class="td-c-5 table-fields" th:text="${stuItt.count}"></td>
+            <td class="td-c-5 table-fields" th:text="${{student.student_name.toUpperCase()}}"></td>
+            <td class="td-c-5 table-fields" th:text="${student.jobtype_name}"></td>
+            <td class="td-c-5 table-fields" th:text="${student.gender}"></td>
+            <td class="td-c-5 table-fields"><button class="view-button" 
+                th:onclick="'showModel('+${stuItt.count}+')'">View</button>
+              <button  class="apply-button" th:onclick="'doShortList('+${student.student_id}+')'">Short-List</button></td>
+          </tr>
+          <tr th:if="${#lists.isEmpty(students)}">
+            <td colspan="4" style="text-align: center; color: red; font-weight: bold;">No records found</td>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+  
+                <div th:each="s,i : ${students}">
+                  <div th:id="k+${i.count}" class="modal">
+
+                    <!-- Modal content -->
+                    <div class="modal-content-1">
+                      <span class="close" th:attr="data-uniqueKey=${i.count}" onclick="closeModal(this.getAttribute('data-uniqueKey'))">&times;</span>
+                      <div class="flex" >
+                        <span ><b>Job Title: </b></span> <span th:text="${s.jobtype_name}"></span>
+                      </div>
+                      <hr>
+                      <span ><b>Full Name</b>: <span th:text="${s.student_name}"></span> </span><br>
+                      <span><b>Gender</b>: <span th:text="${s.gender}"></span></span><br> 
+                       <span><b>Age</b>: <span th:text="${s.age}"></span> Year's</span><br> 
+                      <span><b>Address</b>: <span th:text="${s.address_line1+', '+s.address_line2}"></span></span><br>
+                      <span><b>Preferred Location</b>: <span th:text="${s.location_name}"></span></span><br> 
+                      <span><b>City</b>: <span th:text="${s.city_name}"></span></span><br> 
+                      <span><b>State</b>: <span th:text="${s.state_name}"></span></span><br> 
+                      <span><b>Pincode</b>: <span th:text="${s.zipcode}"></span></span><br>
+                      <span><b>Qualification</b>: <span th:text="${s.qualification}"></span></span><br>
+                      <p>
+                        <b>Skills</b>: <span th:text="${s.jobnames}"></span>
+                      </p>
+                      <br>
+                      <button type="button" class="btn"  th:onclick="'doShortList('+${s.student_id}+')'">Short-List</button>
+                    </div>
+                  </div>
+                </div>
+
+                
+                
+                  <div th:id="jobUnique" class="modal">
+
+                    <!-- Modal content -->
+                    <form id="uniqueJobForm" class="login-form">
+                    <div class="modal-content" th:if="${not #lists.isEmpty(UniqueCodes)}">
+                      <span class="close" onclick="closeJobModal()">&times;</span>
+                      <span ><b>Job Unique Code</b>: <select id="erJobId" class="post-jobs-select-design"  required th:onchange="'showJobLink(this.value)'">
+                      <option value="" selected disabled hidden="hidden">Select Unique Code</option>
+                      <option  th:each="stu : ${UniqueCodes}" th:value="${stu.employer_job_detail_id}" th:text="${stu.unique_job_code}"></option>
+
+                    </select> </span><br>
+                    <input type="hidden" id="studentId">
+                    <span id="viewJobLink" style="display: none;"> <a href="javascript:void(0);" th:onclick="'viewJobByLink()'" >View Job Details</a> </span>
+                     <hr>
+                      <button type="submit" id="short-list-btn" class="btn">Short-List</button>
+                    </div>
+                    </form>
+                    
+                    <div class="modal-content" th:if="${#lists.isEmpty(UniqueCodes)}">
+                      <span class="close" onclick="closeJobModal()">&times;</span>
+                      
+                      <br>
+                      <span>Please post the job to hire the Students.</span>
+                    </div>
+                  </div>
+
+</body>
+</html>

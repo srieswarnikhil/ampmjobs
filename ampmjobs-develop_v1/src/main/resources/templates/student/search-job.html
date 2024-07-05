@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head  th:include="student/header-head :: included-head"></head>
+
+
+<body>
+  <!-- ======= Header ======= -->
+      <header  id="header" class="fixed-top" th:include="student/header :: included-content"></header>
+  
+  <!-- End Header -->
+  <main id="main">
+ 	<!-- ======= Breadcrumbs ======= -->
+	    <div class="breadcrumbs" data-aos="fade-in">
+	      <div class="container">
+	        <h2>Student Search Jobs</h2>
+	        <div class="slick-carousel">
+	         <p>Use your available Free-Time productively by applying to the Jobs Listed.</p>
+	         <p>Work to become Independent</p>
+	         <p>Grow Yourself Technically and Financially </p>
+	         <p>Gain Experience while you learn</p>
+	         <p>Help yourself earn to full fill your minimum expenses (Mobile Recharge, Petrol, Good Food, Exam Fees, Movies and Outing)</p>
+	         <p>Better to work than remain Idle </p>
+	         <p>"Success is not final, failure is not fatal: It is the courage to continue that counts." - Winston Churchill</p>
+	         <p> "The only way to do great work is to love what you do." - Steve Jobs</p>
+	         <p>"The journey of a thousand miles begins with one step." - Lao Tzu</p>
+	         <p>"Unlock opportunities, unlock your potential. Find your perfect part-time job in ampmjobs."  </p>
+	         <p>"Empowering Students one job at a time Discover flexible part-time opportunities on ampm jobs."  </p>
+	         <p>"Work smarter, not harder Find part-time jobs that fit your schedule with ampmjobs."  </p>
+	         <p>"Make your downtime count. Explore part-time gigs tailored for students, only on ampmjobs."  </p>
+	         <p>"Your future starts now. Kick-start your career journey with part-time jobs from ampmjobs."  </p>
+	         <p>"Study smart, work smart. Find meaningful part-time work that complements your studies on ampmjobs."  </p>
+	         <p>"From campus to career. Discover part-time jobs that align with your aspirations on ampmjobs."  </p>
+	         <p>"Build your resume while you build your future. Find part-time gigs that matter on ampmjobs."  </p>
+	         <p>"Where opportunity meets convenience. Find part-time work that fits into your busy student life with ampmjobs."  </p>
+	         <p>"Don't just earn, learn. Explore valuable part-time job opportunities for students on ampmjobs."  </p>
+	         <!-- Add more <p> elements with additional text -->
+	       </div>   
+	      </div>
+	    </div>
+	  <!-- End Breadcrumbs -->
+
+
+  <div class="student-searchjobs-container">
+    <div class="root">
+      <div class="bottom-bar">
+
+          <div class="bottom-header-bar">
+              <div class="bar-left-item">
+                  <span class="display-font-style">Search Jobs</span>
+              </div>
+              <div class="bar-right-item">
+                  <!-- <button class="display-font-style">View More</button> -->
+              </div>
+          </div>
+
+          <div class="bottom-table">
+              <table id="example" class="table table-striped" style="width:100%">
+                  <thead>
+                      <tr>
+                      <th>S. No</th>
+                      <th>Job ID</th>
+                          <th>Job Name</th>
+                          <th>Job Location</th>
+                          <th>Job Type</th>
+                          <th>Pay</th>
+                          <th>Action</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr th:each="job,itt : ${jobsList}" >
+                      <td th:text="${itt.count}"></td>
+                          <td th:text="${job.unique_job_code}"></td>
+                          <td th:text="${job.jobtype_name}"></td>
+                          <td th:text="${job.location_name}"></td>
+                           <td th:text="${job.job_type}"></td>
+                            <td th:text="${job.amount}"></td>
+                          <td class="action-box"><button class="view-button" th:onclick="'viewJob('+${job.employer_job_detail_id}+')'">View</button></td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+
+<div  th:each="job : ${jobsList}">
+          <!-- The Modal -->
+          
+          <div th:id="${job.employer_job_detail_id}" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content-1">
+            <span class="close" th:onclick="'closePopUp('+${job.employer_job_detail_id}+')'">&times;</span>
+            <div class="flex">
+                <span><b>Job Title:</b></span>
+                <span th:text="${job.jobtype_name}"></span>
+            </div>
+            <hr>
+            <span><b>Company Name</b>: 
+            
+            <span th:if="${job.company_name !=null}" th:text="${job.company_name}">  </span>
+             <span th:if="${job.company_name ==null}" > Individual </span>
+             </span><br>
+            <span><b>Contact Name</b>:<span th:text="${job.contact_name}"> </span> </span><br>
+            <span><b>Job Location</b>:<span th:text="${job.location_name}"></span> </span><br>
+            <span><b>Job Type</b>:<span th:text="${job.job_type}"></span> </span><br>
+            <span><b>Job Timing</b>:<span th:text="${job.job_start_date +' to '+ job.job_end_date+', '+job.job_start_time+' to '+job.job_end_time}"></span> </span><br>
+            <span><b>Qualification</b>:<span th:text="${job.qualification}"></span> </span><br>
+            <span><b>Pay</b>:<span th:text="${job.amount}"></span> </span><br>
+            <p><b>Description</b>:<span th:text="${job.job_description}"></span> </p><br>
+            <button class="btn" th:onclick="'applyJob('+${job.employer_job_detail_id}+')'">Apply</button>
+            </div>
+        
+          </div>
+</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ======= Footer ======= -->
+               <footer id="footer"  th:include="footer-1 :: included-footer"></footer>
+<!-- End Footer -->
+       <div id="applyJobByStudent" th:attr="student-job-application-url=@{/student/applyJob}"></div>
+
+  </main>
+
+  
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script th:src="@{/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+  <script th:src="@{/assets/vendor/aos/aos.js}"></script>
+  <script th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+  
+  <!-- Breadcrumbs Carousel Necessary Scripts -->
+<!-- Add jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Add Slick Carousel JS -->
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<!-- Your custom script -->
+<script>
+  $(document).ready(function(){
+    $('.slick-carousel').slick({
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 2300 // Adjust the speed as per your requirement (in milliseconds)
+    });
+  });
+</script>
+ <!-- Breadcrumbs Carousel Necessary Scripts Above -->
+
+  
+  <!-- Template Main JS File -->
+  <script th:src="@{/assets/js/main.js}"></script>
+  <script>
+    // Get dropdown elements
+    var dropdownButton = document.getElementById("dropdownButton");
+    var dropdownContent = document.querySelector(".dropdown-content");
+ 
+    // Toggle display of dropdown content on button click
+    dropdownButton.addEventListener("click", function () {
+        if (dropdownContent.style.display === "block") {
+            dropdownContent.style.display = "none";
+        } else {
+            dropdownContent.style.display = "block";
+        }
+    });
+ </script>
+  <script>
+    new DataTable('#example');
+  </script>
+<script type="text/javascript">
+function viewJob(jobId){
+	debugger;
+	var modal = document.getElementById(jobId);
+    modal.style.display = "block";
+}
+function closePopUp(jobId){
+	debugger;
+	var modal = document.getElementById(jobId);
+    modal.style.display = "none";
+}
+</script>
+
+<script type="text/javascript">
+function applyJob(employer_job_detail_id){
+   debugger;
+     var confirmApply = confirm("Are you sure you want to Apply ?");
+     if (confirmApply) {
+       var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    var applyJobUrl = document.getElementById('applyJobByStudent').getAttribute('student-job-application-url');
+
+    $.ajax({
+      url: applyJobUrl + '/' + employer_job_detail_id,
+      type: 'POST',
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader(header, token);
+      },
+      success: function(response) {
+        if (response == 1) {
+          alert("Job Applied successfully");
+        } else if (response == 2) {
+          alert("You are already applied for this Job.");
+        }
+        else {
+          alert("Something went wrong!!! Please try again.");
+        }
+
+      },
+      error: function(xhr, status, error) {
+        console.error('Error:', error);
+      }
+    });
+     }
+}
+</script>
+ 
+</body>
+
+</html>

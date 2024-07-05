@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+
+<head  th:include="header-head :: included-head"></head>
+
+
+<body>
+  <!-- ======= Header ======= -->
+   <header  id="header" class="fixed-top" th:include="common/header :: included-content"></header>
+  <!-- End Header -->
+
+  <main id="main">
+
+    <div class="form-body">
+        <form class="login-form" id="signUpForm">
+
+            <h3>Signup</h3>
+
+            <input id="enter-number" type="tel" placeholder="Enter Phone Number" required>
+
+            <button id="login-button" type="button" onclick="generateOTP();">Get OTP</button>
+
+            <input id="enter-otp" type="tel" placeholder="Enter OTP" required>
+
+            <button id="login-button" type="submit" >Submit</button>
+
+            <div class="progress-bar"><span>Registration page 1 of 5</span></div>
+        </form>
+
+    </div>
+    
+
+  </main> 
+ 
+   <div id="myUrlForGO" th:attr="data-otp-url=@{/public/generateOTP}"></div>
+    <div id="basicInfoUrl" th:attr="basic-info-url=@{/home/basicDetails/{dbFlag}(dbFlag=${dbFlag})}"></div>
+    <div id="loginUrl" th:attr="user-log-url=@{/login?flag={dbFlag}(dbFlag=${dbFlag})}"></div>
+    <div id="checkOtp" th:attr="check-otp-url=@{/home/checkOTP}"></div>
+    <input type="hidden" id="myDbFlag" th:value="${dbFlag}" />
+  <!-- ======= Footer ======= -->
+     <footer id="footer"  th:include="footer :: included-footer"></footer>
+<!-- End Footer -->
+
+  
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script th:src="@{/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+  <script th:src="@{/assets/vendor/aos/aos.js}"></script>
+  <script th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+  
+  <!-- Template Main JS File -->
+  <script th:src="@{/assets/js/main.js}"></script>
+    <script th:src="@{/assets/js/signup.js}"></script>
+<script>
+		document.addEventListener("DOMContentLoaded", function() {
+    var phoneNumberInput = document.getElementById("enter-number");
+
+    phoneNumberInput.addEventListener("input", function() {
+        var inputValue = phoneNumberInput.value;
+
+        // Remove non-numeric characters
+        inputValue = inputValue.replace(/\D/g, '');
+
+        // Check if the input value starts with zero
+        if (inputValue.startsWith('0')) {
+            // Remove the leading zero
+            inputValue = inputValue.slice(1);
+        }
+
+        // Check if the input value exceeds 10 digits
+        if (inputValue.length > 10) {
+            // If it exceeds, truncate to 10 digits
+            inputValue = inputValue.slice(0, 10);
+        }
+
+        // Update the input field value
+        phoneNumberInput.value = inputValue;
+    });
+});
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var otpNumberInput = document.getElementById("enter-otp");
+
+        otpNumberInput.addEventListener("input", function() {
+            var inputValue = otpNumberInput.value;
+            // Remove non-numeric characters
+            inputValue = inputValue.replace(/\D/g, '');
+
+            // Check if the input value exceeds 4 digits
+            if (inputValue.length > 4) {
+                // If it exceeds, truncate to 4 digits
+                inputValue = inputValue.slice(0, 4);
+            }
+
+            // Update the input field value
+            otpNumberInput.value = inputValue;
+        });
+    });
+</script>
+</body>
+
+</html>

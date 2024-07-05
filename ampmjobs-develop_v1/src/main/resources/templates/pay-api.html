@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en"   xmlns:th="http://www.thymeleaf.org">
+
+<head  th:include="header-head :: included-head"></head>
+
+
+<body>
+
+ <!-- ======= Header ======= -->
+    <header  id="header" class="fixed-top" th:include="common/header :: included-content"></header>
+<!-- End Header -->
+
+
+  <main id="main">
+    
+    <!---student payment page-->
+    
+    <div class="form-body">
+    
+    <button class="btn btn-success" onclick="checkPay();"> Check Pay</button>
+    
+        <form class="login-form"  th:action="@{/student/getAddInfo}" method="GET">
+
+            <h3>Payment Page</h3>
+        
+            <div class="payment-details">
+                <span>Registration Fee: ₹299.00</span>
+                <span>Subscription for 1 year</span>
+            </div>
+            <div class="payment-methods-container">
+                <div class="payment-method">
+                    <div class="type-container">
+                        <img th:src="@{/assets/img/UPI.png}" alt="UPI">
+                        <label>UPI</label>
+                    </div>
+                    <input type="radio" name="payment-method" placeholder="payment-type" required>
+                </div>
+                <div class="payment-method">
+                    <div class="type-container">
+                        <img th:src="@{/assets/img/PayZAPP.jpeg}" alt="UPI">
+                        <label>Netbanking</label>
+                    </div>
+                    <input type="radio" name="payment-method" placeholder="payment-type" required>
+                </div>
+                <div class="payment-method">
+                    <div class="type-container">
+                        <img th:src="@{/assets/img/visa.png}" alt="UPI">
+                        <img th:src="@{/assets/img/master.jpeg}" alt="UPI">
+                        <img th:src="@{/assets/img/rupay.png}" alt="UPI">
+                        <label>Credit/Debit Card</label>
+                    </div>
+                    <input type="radio" name="payment-method" placeholder="payment-type" required>
+                </div>
+            </div>
+        
+            <button id="login-button" type="submit">Submit</button>
+
+            <div class="progress-bar"><span>Registration page 4 of 5</span></div>
+        </form>
+              
+        
+    </div>
+
+  </main>
+   <!-- ======= Footer ======= -->
+   <footer id="footer"  th:include="footer :: included-footer"></footer>
+   <!-- End Footer -->
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script th:src="@{/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+  <script th:src="@{/assets/vendor/aos/aos.js}"></script>
+  <script th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+
+  <!-- Template Main JS File -->
+  <script th:src="@{/assets/js/main.js}"></script>
+  
+  
+  
+<script type="text/javascript">
+
+function checkPay(){
+  alert("this is pay");
+
+  var payload = {
+      'merchantId': 'PGTESTPAYUAT101',
+      'merchantTransactionId': 'MT7850590068188104',
+      'merchantUserId': 'MUID123',
+      'amount': 10000,
+      'redirectUrl': 'https://ampmjobs.in/kk',
+      'redirectMode': 'REDIRECT',
+      'callbackUrl': 'https://ampmjobs.in/kk',
+      'mobileNumber': '9999999999',
+      'paymentInstrument': {
+        'type': 'PAY_PAGE',
+      }
+    }
+  
+  var uri = "/pg/v1/pay";
+  var saltKey = "4c1eba6b-c8a8-44d3-9f8b-fe6402f037f3";
+  var saltIndex = "1";
+  
+  
+   var encodedPayload = btoa(payload);
+  var sha256Key = sha256(encodedPayload+''+uri+''+saltKey);
+  
+  var xVerifyKey = sha256Key+'###'+saltIndex;
+  
+  const settings = {
+    async: true,
+    crossDomain: true,
+    url: 'https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay',
+    method:  'post',
+    headers: {
+      'X-VERIFY': xVerifyKey,
+      'Content-Type' : 'application/json' 
+      },
+      processData: false,
+      data: payload
+  }
+  $.getJSON(settings).done(function (response) {
+    console.log(response);
+  });
+}
+
+
+function sha256(str) {
+    // Convert string to array buffer
+    var buffer = new TextEncoder("utf-8").encode(str);
+    // Compute hash
+    return crypto.subtle.digest("SHA-256", buffer).then(function(hash) {
+        // Convert hash to hexadecimal string
+        return Array.prototype.map.call(new Uint8Array(hash), function(x) {
+            return ('00' + x.toString(16)).slice(-2);
+        }).join('');
+    });
+}
+</script>
+  
+
+</body>
+
+</html>

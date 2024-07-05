@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style type="text/css">
+        .container {
+            max-width: 1200px; /* Set maximum container width */
+            margin: 0 auto; /* Center the container horizontally */
+        }
+
+        .custom-button {
+            background-color: white; /* Button background color */
+            color: black; /* Button text color */
+            border: none; /* Remove button border */
+            padding: 5px 10px; /* Button padding */
+            cursor: pointer; /* Change cursor to pointer on hover */
+            border-radius: 2px; /* Button border radius */
+            transition: background-color 0.3s ease; /* Smooth transition for background color */
+        }
+
+        .custom-button:hover {
+            background-color: #0056b3; /* Darker background color on hover */
+        }
+
+        .custom-button span {
+            margin-right: 5px; /* Add spacing between text and icon */
+        }
+
+        .delete-icon {
+            color: #ffffff; /* Icon color */
+            font-size: 16px; /* Icon font size */
+        }
+
+        /* Add spacing between rows */
+        .row {
+            margin-top: 20px;
+        }
+
+        /* Add spacing between columns */
+        .flex-fill {
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-6" th:if="${not #lists.isEmpty(dateList)}">
+            <div class="col-md-12">
+                <!-- Iterate over the dateList and group items into rows of four -->
+                <div class="d-flex flex-wrap">
+                    <!-- Iterate over items in the current row -->
+                    <div th:each="item : ${dateList}" class="flex-fill">
+                        <button class="custom-button" th:attr="data-unique-key=${item}" onclick="deleteRow(this.getAttribute('data-unique-key'))">
+                            <span th:text="${item}"></span>
+                            <span th:if="${item != '- - - - - - - - - - -'}" class="delete-icon">
+                                <i style="color: red;" class="fas fa-trash"></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+    </div>
+</body>
+</html>

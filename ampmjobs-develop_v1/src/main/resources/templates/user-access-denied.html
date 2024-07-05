@@ -1,0 +1,42 @@
+!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head  th:include="header-head :: included-head"></head>
+
+<body>
+
+   <!-- ======= Header ======= -->
+  <header  id="header" class="fixed-top" th:include="common/header :: included-content"></header>
+  <!-- End Header -->
+  <br><br><br><br><br>
+    <div class="container">
+    <div class="access-denied" align="center">
+     <div class="image-container">
+      <img class="circular-image" th:src="@{/assets/img/access-denied-user.png}" alt="access denied image"/>
+     </div>
+      <h3>Sorry, you are not authorized to access this page.</h3>
+      <br>
+      <button class="get-started-btn" type="button" onclick="goToDashboard();">Back to Home</button>
+    </div>
+  </div>
+<footer id="footer"  th:include="footer :: included-footer"></footer>
+    <div id="dashboardUrl" th:attr="user-dashboard-url=@{/user/home}"></div>
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script th:src="@{/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+  <script th:src="@{/assets/vendor/aos/aos.js}"></script>
+  <script th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+  <!-- Template Main JS File -->
+  <script th:src="@{/assets/js/main.js}"></script>
+  
+  <script th:inline="javascript">
+      function goToDashboard() {
+        var dashboardUrl = document.getElementById('dashboardUrl').getAttribute('user-dashboard-url');
+        location.href = dashboardUrl;
+      }
+    </script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="employer/header-head :: included-head"></head>
+
+
+<body>
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top" th:include="employer/header :: included-content"></header>
+
+  <!-- End Header -->
+  <main id="main">
+    	<!-- ======= Breadcrumbs ======= -->
+	    <div class="breadcrumbs" data-aos="fade-in"> 
+      <div class="container">
+		  
+	        <h2>Employer's Dashboard</h2>
+	        <div class="slick-carousel">
+	         <p>Welcome!! Explore the new experience – Hired Students based on Selected Jobs</p>
+	         <p>"Your most unhappy customers are your greatest source of learning." - Bill Gates</p>
+	         <p>"Part-time employees bring a fresh perspective and valuable skills to the table, contributing to the success of any team." </p>
+	         <p>"Hiring part-time workers can be a strategic move, offering businesses the ability to adapt quickly to changing needs." </p>
+	         <p>"Embrace the power of part-time talent; it's not about the hours worked, but the impact made." </p>
+	         <p>"Sometimes, greatness comes in part-time packages – hire for passion, dedication, and results." </p>
+	         <p>"Unlock the potential of part-time hires; they bring unique perspectives and a dynamic approach to the workplace." </p>
+	         <p>"Quality part-time employees don't watch the clock; they focus on what counts and deliver exceptional outcomes."</p>
+	         <p>"Smart companies recognize that part-time roles can be filled with full-time dedication and commitment."</p>
+	         <p>"Part-time positions create opportunities for individuals to pursue passions outside of work, leading to a more fulfilled and motivated team."</p>
+	         <p>"Quality over quantity: part-time employees can deliver exceptional results without the need for a full-time commitment."</p>
+	         <!-- Add more <p> elements with additional text -->
+	       </div>   
+	      </div>
+	    </div>
+	  <!-- End Breadcrumbs -->
+
+
+    <div class="employer-dashboard-container">
+      <div class="root">
+        <div class="body-main">
+          <div class="browse-jobs">
+            <div class="browse-jobs-top-bar">
+              <span>Browse Jobs</span>
+              <!-- <button>View More</button> -->
+            </div>
+            <div class="jobs-list">
+              <ul>
+                <li th:each="title : ${jobTitles}"><a class="colColour" th:id="${title.jobtype_id}" href="javascript:void(0)"
+                  th:onclick="'displayTable('+${title.jobtype_id}+')'" th:text="${title.jobtype_name} + ' (' + ${title.matched_student_count} + ')'"></a></li>
+              </ul>
+            </div>
+            <div id="myResult">
+             <br>
+             <br>
+            </div>
+
+            <div class="body-main-components">
+              <div class="statistics">
+                <div class="statistics-top-bar">
+                  <span>Statistics - Latest Updates</span>
+                  <!-- <button>View All</button> -->
+                </div>
+                <div class="statistics-body">
+                  <h3>Site Statistics:</h3>
+                  <span>Students</span> : <span th:text="${statistics.total_students}"></span>
+                  <div>
+                    <div></div>
+                  </div>
+                  <span>Employers</span> : <span th:text="${statistics.total_employers}"></span>
+                  <div>
+                    <div></div>
+                  </div>
+                  <span>Total Jobs </span> : <span th:text="${statistics.total_jobs}"></span>
+                  <div >
+                    <div></div>
+                  </div>
+                </div>
+              </div>
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" th:include="footer-1 :: included-footer"></footer>
+    <!-- End Footer -->
+    
+       <div id="getStudents" th:attr="data-students-url=@{/employer/loadResultsByJobTypeId}"></div>
+
+       <div id="shortListStudent" th:attr="short-list-students-url=@{/employer/shortListStudent}"></div>
+       <div id="verifyStudentApplication" th:attr="verify-status-students-url=@{/employer/checkIsStudentSelected}"></div>
+       
+    
+    <form th:action="@{/employer/jobAction}" th:hidden="hidden" th:id="jobActionFormInDashboard" th:method="POST">
+<input type="hidden" id="jobId" name="jobId">
+<input type="hidden" id="flag" name="flag">
+</form>
+    
+  </main>
+
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script th:src="@{/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+  <script th:src="@{/assets/vendor/aos/aos.js}"></script>
+  <script th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+  
+  <!-- Breadcrumbs Carousel Necessary Scripts -->
+<!-- Add jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Add Slick Carousel JS -->
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<!-- Your custom script -->
+<script>
+  $(document).ready(function(){
+    $('.slick-carousel').slick({
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 2300 // Adjust the speed as per your requirement (in milliseconds)
+    });
+  });
+</script>
+ <!-- Breadcrumbs Carousel Necessary Scripts Above -->
+
+  <script>
+   // Get dropdown elements
+   var dropdownButton = document.getElementById("dropdownButton");
+   var dropdownContent = document.querySelector(".dropdown-content");
+
+   // Toggle display of dropdown content on button click
+   dropdownButton.addEventListener("click", function () {
+       if (dropdownContent.style.display === "block") {
+           dropdownContent.style.display = "none";
+       } else {
+           dropdownContent.style.display = "block";
+       }
+   });
+</script>
+  <!-- Template Main JS File -->
+  <script th:src="@{/assets/js/main.js}"></script>
+  <script th:src="@{/assets/js/er-dashboard.js}"></script>
+
+  <script>
+    //Calander Date and Day Code:
+    function displayCurrentDateAndDay() {
+        // Create a new Date object
+        var currentDate = new Date();
+    
+        // Get the day of the week (0 for Sunday, 1 for Monday, ..., 6 for Saturday)
+        var currentDayOfWeek = currentDate.getDay();
+    
+        // Calculate the date for each day of the current week
+        var datesOfWeek = [];
+        for (var i = 0; i < 7; i++) {
+            var dateOfWeek = new Date();
+            dateOfWeek.setDate(currentDate.getDate() - currentDayOfWeek + i);
+            datesOfWeek.push(dateOfWeek);
+        }
+    
+        // Get the HTML elements by their ids
+        var dayElements = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"].map(id => document.getElementById(id));
+    
+        // Update the content of the HTML elements with the dates for the current week
+        for (var i = 0; i < 7; i++) {
+            var dayElement = dayElements[i];
+            var dateOfWeek = datesOfWeek[i];
+            var formattedDateOfWeek = dateOfWeek.getDate() + '/' + (dateOfWeek.getMonth() + 1) + '/' + dateOfWeek.getFullYear();
+            //dayElement.nextElementSibling.innerHTML = formattedDateOfWeek;
+        }
+    }
+    
+    // Call the function to display the dates for the current week when the page loads
+    displayCurrentDateAndDay();
+ </script>
+</body>
+
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en"   xmlns:th="http://www.thymeleaf.org">
+
+<head  th:include="header-head :: included-head"></head>
+
+
+<body>
+
+ <!-- ======= Header ======= -->
+    <header  id="header" class="fixed-top" th:include="common/header :: included-content"></header>
+<!-- End Header -->
+
+
+  <main id="main">
+    <div class="form-body">
+        <form class="login-form" id="erAddInfo">
+
+            <h3>Employer Additional Information</h3>
+            <b class="Mandatory">(All Fields are Mandatory)</b>
+
+            <input id="login-address1" type="text" maxlength="60" placeholder="Address Line 1" required="required">
+
+            <input id="login-address2" type="text" maxlength="60" placeholder="Address Line 2" required="required">
+           
+            <select class="form-design" id="stateId"
+              name="state" required onchange="loadCities(this.value);">
+              <option value="" selected disabled hidden>State</option>
+              <option th:value="${myData.state_id}" th:each="myData : ${stateList}" th:text="${myData.state_name}"></option>
+            </select> 
+            
+            <select class="form-design" id="cityId" name="city" required>
+          <option value="" selected disabled hidden>City</option>
+        </select> 
+
+            <input id="login-pin" class="form-design" type="tel" placeholder="Pincode" maxlength="6" required="required">
+
+            <!-- Qualifications Input TODO -->
+
+            <div id="list1" class="dropdown-check-list" tabindex="100">
+                <span class="anchor">Select 5 Domains</span>
+                <ul class="items">
+            <li th:each="myData : ${jobsData}"><input type="checkbox" class="checkbox" onclick="limitCheckboxes()"
+              th:value="${myData.jobtype_id}" /> <span th:text="${myData.jobtype_name}"></span></li>
+          </ul>
+                
+            </div>
+
+            <button id="login-button" type="submit">Submit</button>
+
+            <div class="progress-bar"><span>Registration page 5 of 5</span></div>
+        </form>   
+    <!---Additional Information Form-->
+    </div>
+  </main><!-- End #main -->
+
+  
+ <!-- ======= Footer ======= -->
+     <footer id="footer"  th:include="footer :: included-footer"></footer>
+<!-- End Footer -->
+   <div id="regErSuccId" th:attr="reg-er-succ-url=@{/user/regCompleted}"></div>
+   <div id="erUrlAddInfo" th:attr="update-add-info-url=@{/employer/updateAddInfo}"></div>
+  <div id="loadTemplate" th:attr="template-url=@{/user/loadTemplate}"></div>
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script th:src="@{/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+  <script th:src="@{/assets/vendor/aos/aos.js}"></script>
+  <script th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+
+  <!-- Template Main JS File -->
+  <script th:src="@{/assets/js/main.js}"></script>
+  <script th:src="@{/assets/js/employerAddInfo.js}"></script>
+  <script>
+    var checkList = document.getElementById('list1');
+    var items = checkList.getElementsByClassName('checkbox');
+    var anchor = checkList.getElementsByClassName('anchor')[0];
+
+    // Update the dropdown list anchor text when a checkbox is clicked
+    for (var i = 0; i < items.length; i++) {
+        items[i].addEventListener('click', function(evt) {
+            updateAnchorText();
+            limitCheckboxes();
+        });
+    }
+
+    // Function to update the dropdown list anchor text
+    function updateAnchorText() {
+        var selectedItems = [];
+        for (var i = 0; i < items.length; i++) {
+            if (items[i].checked) {
+                selectedItems.push(items[i].parentNode.textContent.trim());
+            }
+        }
+        anchor.textContent = selectedItems.join(', ') || 'Select Domains';
+    }
+
+    function limitCheckboxes() {
+        var checkboxes = document.querySelectorAll('.checkbox');
+        var checkedCount = 0;
+        var maxChecked = 5;
+
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                checkedCount++;
+                if (checkedCount > maxChecked) {
+                    checkboxes[i].checked = false; // Unselect the checkbox if the limit is exceeded
+                    checkedCount--;
+                    alert('You can only select up to 5 checkboxes.');
+                }
+            }
+        }
+
+        // Disable additional checkboxes if 5 are already selected
+        if (checkedCount >= maxChecked) {
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (!checkboxes[i].checked) {
+                    checkboxes[i].disabled = true;
+                }
+            }
+        } else {
+            // Enable all checkboxes if less than 5 are selected
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].disabled = false;
+            }
+        }
+    }
+
+    anchor.onclick = function (evt) {
+        if (checkList.classList.contains('visible'))
+            checkList.classList.remove('visible');
+        else
+            checkList.classList.add('visible');
+    }
+</script>
+<script>
+     document.addEventListener("DOMContentLoaded", function() {
+            var pincodeEl = document.getElementById("login-pin");
+
+            pincodeEl.addEventListener("blur", function() {
+                var inputValue = pincodeEl.value;
+                // Remove non-numeric characters
+                inputValue = inputValue.replace(/\D/g, '');
+
+                if (inputValue.startsWith('0')) {
+                    // Remove the leading zero
+                    inputValue = inputValue.slice(1);
+                }
+                if(inputValue.length < 6 || inputValue.length > 6 ){
+                    pincodeEl.value = "";
+                    alert("please enter correct pincode");
+                }
+                else{
+                    // Update the input field value
+                    pincodeEl.value = inputValue;
+                }
+                
+            });
+          });
+  </script>
+
+
+
+
+
+</body>
+
+</html>
