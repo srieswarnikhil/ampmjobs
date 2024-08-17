@@ -34,8 +34,12 @@
 <!-- End Header -->
 
   <!-- ======= Hero Section ======= -->
+  
   <section id="hero" class="d-flex justify-content-center align-items-center">
-    <div class="container position-relative" data-aos="zoom-in" data-aos-delay="100">
+	  <div class="container position-relative" data-aos="zoom-in" data-aos-delay="100">
+		  <div class="notification-container">
+          	<div id="notification" class="notification"></div>
+    	  </div>
       <h1>Join now ampmjobs</h1>
       <h2>Earn while you learn!</h2>
       <h2>where you can find the perfect job near you!</h2>
@@ -53,6 +57,9 @@
       <div class="container" data-aos="fade-up">
 
         <div class="row">
+			<div class="notification-container-1">
+        		<div id="notification-1" class="notification-1"></div>
+    		</div>
           <div class="col-lg-5 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
            
              
@@ -187,16 +194,23 @@
         <div class="row" data-aos="zoom-in" data-aos-delay="100">
           <div class="col-lg-3 col-md-4">
             <div class="icon-box">
-              <i class="ri-store-line" style="color: #ffbb2c;"></i>
-              <h3><a href="">Zomato</a></h3>
+              <!--<i class="ri-stor-line d-cafe" th:src="@{/assets/img/cafe.png}" style="color: #ffbb2c;"></i>-->
+              <img th:src="@{/assets/img/cafe.png}" style="width:32px;height: 32px;background-image:cover;margin-right: 10px;">
+              <h3><a href="">De Cafe Studio</a></h3>
             </div>
           </div>
           <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
             <div class="icon-box">
+			  <img th:src="@{/assets/img/GrillAffairs-1.jpg}" style="width:32px;height: 32px;background-image:cover;margin-right: 10px;">
+              <h3><a href="">Grill affair</a></h3>
+            </div>
+          </div>
+          <!--<div class="col-lg-3 col-md-4 mt-4 mt-md-0">
+            <div class="icon-box">
               <i class="ri-bar-chart-box-line" style="color: #5578ff;"></i>
               <h3><a href="">Swiggy</a></h3>
             </div>
-          </div>
+          </div>-->
           <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
             <div class="icon-box">
               <i class="ri-calendar-todo-line" style="color: #e80368;"></i>
@@ -259,8 +273,67 @@
     <script th:src="@{/assets/js/main.js}"></script>
     <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js}"></script>
     <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js}"></script>
+	<script>
+		
+const notifications = [
+	    "New Job Posted: Delivery Boys Required --  The Malik Group - Kukatpally -- Please Login Dashboard To Apply",
+	    "New Job Posted: Catering waiters, Cooks Required -- De Cafe Studio - Malakpet -- Please Login Dashboard To Apply",
+	    "Hurry up !!! for the Registration and Avail Discounts, Please call us on the below numbers."
+	];
+	
+	let currentIndex = 0;
+	const notificationElement = document.getElementById('notification');
+	
+	function showNextNotification() {
+	    const notificationText = notifications[currentIndex];
+	    notificationElement.innerHTML = '';
+	    notificationText.split('').forEach((char, index) => {
+	        const span = document.createElement('span');
+	        span.textContent = char === ' ' ? '\u00A0' : char;
+	        span.className = 'letter';
+	        span.style.animationDelay = `${index * 0}s`;
+	        notificationElement.appendChild(span);
+	    });
+	    currentIndex = (currentIndex + 1) % notifications.length;
+	}
+	
+	// Initial notification
+	showNextNotification();
+	
+	// Change notification every 3 seconds (matches the CSS animation duration)
+	setInterval(showNextNotification, 10000);
 
+const notificationsmall= [
+    "New Job Posted: Delivery Boys Required --  The Malik Group - Kukatpally -- Please Login Dashboard To Apply",
+	    "New Job Posted: Catering waiters, Cooks Required -- De Cafe Studio - Malakpet -- Please Login Dashboard To Apply",
+	    "Hurry up !!! for the Registration and Avail Discounts, Please call us on the below numbers."
+];
 
+let currentIndexsmall = 0;
+const notificationElement1 = document.getElementById('notification-1');
+
+function showNextNotification1() {
+    notificationElement1.textContent = notificationsmall[currentIndexsmall];
+    currentIndexsmall = (currentIndexsmall + 1) % notificationsmall.length;
+}
+
+// Initial notification
+showNextNotification1();
+
+// Change notification every 10 seconds (matches the CSS animation duration)
+setInterval(showNextNotification1, 15000);
+
+notificationElement1.addEventListener('mouseover', () => {
+    notificationElement1.style.animationPlayState = 'paused';
+});
+
+// Resume the animation when not hovering over the notification
+notificationElement1.addEventListener('mouseout', () => {
+    notificationElement1.style.animationPlayState = 'running';
+});
+
+	</script>
+	
 </body>
 
 </html>

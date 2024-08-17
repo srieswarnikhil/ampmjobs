@@ -8,7 +8,14 @@
         <h1 class="logo me-auto">
             <a th:href="@{/student/act/dashboard}"><img th:src="@{/assets/img/ampmlogo.png}" class="img-logo" alt="AM PM Jobs Logo"></a>
         </h1>
-        
+		
+		<div class="d-flex justify-content-center align-items-center" style="margin-left: 10px;">
+			<select style="width: fit-content;padding: 5px;font-size: 16px;">
+				<option style="font-size: 16px;">Select Locations</option>
+				<option style="font-size: 16px;">Bangalore</option>
+				<option style="font-size: 16px;">Hyderabad</option>
+			</select>
+		</div>
         <nav id="navbar" class="navbar order-last order-lg-0">
 
             <ul sec:authorize="hasRole('ROLE_STUDENT')">
@@ -17,6 +24,7 @@
                 <li><a th:class="${activeClass == 'jobSearch' ? 'active':''}" th:href="@{/student/act/searchJob}">Search Jobs</a></li>
                 <li><a th:class="${activeClass == 'myJobs' ? 'active':''}" th:href="@{/student/act/myJobs}">My Jobs</a></li>
                 <li><a th:class="${activeClass == 'editProfile' ? 'active':''}" th:href="@{/student/act/editProfile}">Edit Profile</a></li>
+                
                 <li>
 					
                 <div class="profile-dropdown">

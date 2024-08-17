@@ -1441,5 +1441,108 @@ input:disabled:hover {
 	} 
   }
 
-  
+ /* Notifying latest Updates*/
+.notification-container {
+    width: 100%;
+    overflow: hidden;
+    background-color: transparent;
+    border: 1px solid transparent;
+    /*box-shadow: 0 0 10px rgba(0,0,0,0.1);*/
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
 
+.notification {
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    text-wrap: wrap;
+    letter-spacing: 0.2rem;
+}
+
+.letter {
+    display: inline-block;
+    animation: slideInOut 10s linear;
+}
+
+@keyframes slideInOut {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    10% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    90% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+}
+.notification-container-1 {
+    width: 100vw;
+    overflow: hidden;
+    background-color: antiquewhite;
+    border: 1px solid antiquewhite;
+    border-radius:10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.notification-1 {
+    width: 100%;
+    font-size: 18px;
+    color: black;
+    padding: 6px;
+    white-space: nowrap;
+    animation: scroll 15s linear infinite;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(+100%);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(-100%);
+        opacity: 1;
+    }
+
+
+}
+.clickhere-button{
+	margin: 0px;
+	padding: 0px;
+	color: black;
+	background-color: transparent;
+	border: 1px solid transparent;
+	font-weight: bold;
+}
+.clickhere-button:hover{
+	margin: 5px;
+	padding: 10px;
+	color: white;
+	background-color:#2891D1;
+	border: 1px solid#2891D1;
+	font-weight: normal;
+}
+.register-button{
+	margin: 5px;
+	padding: 10px;
+	color: white;
+	background-color: #2891D1;
+	border: 1px solid #2891D1;
+	font-weight: normal;
+}
+/*----------------*/

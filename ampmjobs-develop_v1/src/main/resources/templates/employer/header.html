@@ -5,14 +5,14 @@
 <header th:fragment="included-content">
     <div class="container d-flex align-items-center">
         <h1 class="logo me-auto">
-            <a th:href="@{/}"><img th:src="@{/assets/img/ampmlogo.png}" class="img-logo" alt="AM PM Jobs Logo"></a>
+            <a th:href="@{/employer/act/dashboard}"><img th:src="@{/assets/img/ampmlogo.png}" class="img-logo" alt="AM PM Jobs Logo"></a>
         </h1>
 
         <nav id="navbar" class="navbar order-last order-lg-0">
 
 
             <ul sec:authorize="hasRole('ROLE_EMPLOYER')">
-                <li><a th:class="${activeClass == 'home' ? 'active':''}" th:href="@{/}">Home</a></li>
+                <li><a th:class="${activeClass == 'home' ? 'active':''}" th:href="@{/employer/act/dashboard}">Home</a></li>
                 <li><a th:class="${activeClass == 'dashboard' ? 'active':''}" th:href="@{/employer/act/dashboard}">Dashboard</a></li>
                 <li><a th:class="${activeClass == 'jobPost' ? 'active':''}" th:href="@{/employer/act/jobPost}">Post Jobs</a></li>
                 <li><a th:class="${activeClass == 'postedJobs' ? 'active':''}" th:href="@{/employer/act/postedJobs}">Jobs Posted</a></li>
