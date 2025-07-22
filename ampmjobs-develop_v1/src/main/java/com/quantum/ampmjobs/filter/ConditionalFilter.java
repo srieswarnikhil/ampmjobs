@@ -62,11 +62,10 @@ public class ConditionalFilter implements HandlerInterceptor {
 			AuthorizedUser user = (AuthorizedUser) authentication.getPrincipal();
 			if ("STUDENT".equals(user.getRole())) {
 
-				/*if (!user.isPaymentCompleted()) {
+				if (!user.isPaymentCompleted()) {
 					res.sendRedirect(contextPath + "/student/getPaymentInfo");
 					return false;
-				}*/
-				
+				}
 
 				if (!user.isAddtionDetailsFilled()) {
 					res.sendRedirect(contextPath + "/student/getAddInfo");

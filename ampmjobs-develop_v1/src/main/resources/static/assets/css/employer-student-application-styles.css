@@ -1545,11 +1545,9 @@ table .table-striped td button{
     text-align: center;
   }
   .description-control{
-	    height: 100%;
-	    text-overflow: ellipsis;
-	    
-  	}  
-  
+    height: 100%;
+    text-overflow: ellipsis;
+  }
   .view-button{
     background-color: green;
     color: #fff;

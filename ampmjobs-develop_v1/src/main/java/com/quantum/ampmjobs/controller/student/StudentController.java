@@ -119,7 +119,6 @@ public class StudentController {
 		return new RedirectView(url);
 	}
 
-
 	@GetMapping("/phonePayToAmPm")
 	public RedirectView phonePayToAmPm(@AuthenticationPrincipal final AuthorizedUser user) {
 
@@ -165,7 +164,7 @@ public class StudentController {
 		}
 		return new RedirectView(url);
 	}
-	
+
 	@GetMapping("/getAddInfo")
 	public String getAddInfo(final Model model, @AuthenticationPrincipal final AuthorizedUser user) {
 
@@ -298,4 +297,3 @@ public class StudentController {
 	}
 
 }
-
